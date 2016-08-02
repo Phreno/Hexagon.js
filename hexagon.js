@@ -197,40 +197,195 @@ HexagonGrid.prototype.clickEvent = function (e) {
     } 
 };
 
-HexagonGrid.prototype.convertOddQ2Cube = function convertOddQ2Cubecoordinate(col, row) {
-    var x = col;
-    var z = row - (col - (col&1)) / 2;
-    var y = -x-z;
-    return {
-        x: x,
-        z: z,
-        y: y
+/**
+ * Designation des mouvements sur les axes.
+ * */
+move = {
+    forward: +1,
+    backward: -1,
+    none: 0
+}
+
+/**
+ * Definition des differents systemes de coordonnees.
+ * */
+HexagonGrid.prototype.coordinate = {
+    /**
+     * Systeme de coordonnee relatif au coin superieur gauche.
+     * Utilise pour le trace.
+     * Orientation: flat.
+     * */
+    oddQ: {
+        /**
+         * Converti des coordonnee odd-q en coordonnee cubique.
+         * @oddq coordonnee a convertir.
+         * */
+        convertToCube: function convertToCube (oddq) {
+            var x = oddq.col;
+            var z = oddq.row - (oddq.col - (oddq.col&1)) / 2;
+            var y = -x-z;
+            return {
+                x: x,
+                z: z,
+                y: y
+            };
+        }
+    },
+
+    /**
+     * Systeme de coordonnee utilise pour le calcul.
+     * */
+    cube: {
+        /**
+         * Offset de deplacement lorsque l on se deplace vers ...
+         * */
+        direction: {
+            southEast: {
+                x: move.forward,
+                y: move.backward,
+                z: move.none
+            }, northEast: {
+                x: move.forward,
+                y: move.none,
+                z: move.backward
+            }, north: {
+                x: move.none,
+                y: move.forward,
+                z: move.backward
+            }, northWest: {
+                x: move.backward,
+                y: move.forward,
+                z: move.none
+            }, southWest: {
+                x: move.backward,
+                y: move.none,
+                z: move.forward
+            }, south: {
+                x: move.none,
+                y: move.backward,
+                z: move.forward
+            },
+        },
+        /**
+         * Converti des coordonnees cubiques en coordonnees odd-q.
+         * @cube coordonnee a convertir.
+         * */
+        convertToOddQ: function convertToOddQ (cube) {
+            var col = cube.x;
+            var row = cube.z + (cube.x - (cube.x&1)) / 2;
+            return {
+                col: col,
+                row: row
+            }
+        },
+        /**
+         * Converti des coordonnees cubiques en coordonnees axiale.
+         * @cube coordonnee a convertir.
+         * */
+        convertToAxial: function convertToAxial (cube) {
+            return {
+                col: cube.x,
+                row: cube.z
+            }
+        },
+        /**
+         * Recupere le cube adjacent dans la direction donnee.
+         * @direction cote adjacent.
+         * @cube cellule a partir de laquelle est effectue le pas de cote.
+         * */
+        stepAside: function stepAside (direction, cube) {
+            return {
+                x: cube.x + direction.x,
+                y: cube.y + direction.y,
+                z: cube.z + direction.z
+            };
+        },
+        /**
+         * Recupere les cases au voisinage.
+         * @cube cellule dont on veut recuperer les cases voisines.
+         * */
+        getNeighborhood: function getNeighborhood (cube) {
+            return [
+                this.stepAside(this.direction.southEast, cube),
+                this.stepAside(this.direction.northEast, cube),
+                this.stepAside(this.direction.north, cube),
+                this.stepAside(this.direction.northWest, cube),
+                this.stepAside(this.direction.southWest, cube),
+                this.stepAside(this.direction.south, cube)
+            ];
+        },
+        /**
+         * Recupere la case au voisinage dans la direction ...
+         * @direction cote par lequel on recupere le voisin.
+         * @cube cellule dont on veut recuperer le voisin.
+         * */
+        getNeighbor: function getNeighbor (direction, cube) {
+            var neighbor = null;
+                if("number" === typeof(direction)) neighbor = this.getNeighborhood(cube)[direction];
+                else if("string" === typeof(direction)) neighbor = this.stepAside(this.direction[direction], cube);
+                else if("object" === typeof(direction)) neighbor = this.stepAside(direction, cube);
+                return neighbor;
+        },
+        /**
+         * Recupere le chemin a partir d une case dans une direction.
+         * @direction cote par lequel par le chemin.
+         * @radius longueur du chemin.
+         * @cube depart du chemin.
+         * */
+        follow: function follow (direction, radius, cube) {
+            var path = [];
+            path.push(cube);
+            while(radius--) {
+                cube = this.getNeighbor(cube, direction);
+                path.push(cube);
+            }
+            return path;
+        }
+    },
+    /*  */
+    axial: {
+        /**
+         * Converti une coordonnee axiale en coordonnee cubique.
+         * @axial coordonnees axiales de la cellule.
+         * */
+        convertToCube: function convertToCube(axial) {
+            var x = axial.col;
+            var z = axial.row;
+            var y = -x-z;
+            return {
+                x: x,
+                z: z,
+                y: y
+            };
+        }
     }
 }
 
-HexagonGrid.prototype.convertCube2OddQ = function convertCube2OddQCoordinate(x, y, z) {
-    var col = x;
-    var row = z + (x - (x&1)) / 2;
-    return {
-        col: col,
-        row: row
+/**
+ * Recupere un anneau.
+ * @center le center de l anneau.
+ * @radius la taille du rayon.
+ * */
+HexagonGrid.prototype.getRing = function cubeRing(center, radius) {
+    var direction = this.coordinate.cube.direction;
+    var cube = this.coordinate.cube.follow(direction.southWest, radius, center).pop();
+    var result = [];
+    for (var side = 0; side < 6; side++) {
+        for (var offset = 0; offset < radius; offset++) {
+            result.push(cube);
+            cube = this.coordinate.cube.getNeighbor(side, cube);
+        }
     }
+    result = result.map(this.coordinate.cube.convertToOddQ);
+    return result;
 }
 
-HexagonGrid.prototype.convertCube2Axial = function convertCube2Axial(x, z) {
-    return {
-        col: x,
-        row: z
-    }
-}
-
-HexagonGrid.prototype.convertAxial2Cube = function convertAxial2Cube(col, row) {
-    var x = q;
-    var z = r;
-    var y = -x-z;
-    return {
-        x: x,
-        z: z,
-        y: y
-    }
+/**
+ * Redessine un set de cellules.
+ * @cells toutes les cellules a tracer.
+ * */
+HexagonGrid.prototype.drawCells = function drawCells (cells) {
+    for(var index = 0; index < cells.length; index++) {
+        this.drawHexAtColRow(cells[index].col, cells[index].row, "#000");
+    };
 }
