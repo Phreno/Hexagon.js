@@ -321,9 +321,17 @@ HexagonGrid.prototype.coordinate = {
          * */
         getNeighbor: function getNeighbor (direction, cube) {
             var neighbor = null;
-                if("number" === typeof(direction)) neighbor = this.getNeighborhood(cube)[direction];
-                else if("string" === typeof(direction)) neighbor = this.stepAside(this.direction[direction], cube);
-                else if("object" === typeof(direction)) neighbor = this.stepAside(direction, cube);
+                if("number" === typeof(direction)) {
+                    neighbor = this.getNeighborhood(cube)[direction];
+                }
+                else if("string" === typeof(direction)) {
+                    neighbor = this.stepAside(this.direction[direction], cube);
+                }
+                else if("object" === typeof(direction)) {
+                    neighbor = this.stepAside(direction, cube);
+                } else {
+                    nonsole.log("err");
+                }
                 return neighbor;
         },
         /**
@@ -334,9 +342,8 @@ HexagonGrid.prototype.coordinate = {
          * */
         follow: function follow (direction, radius, cube) {
             var path = [];
-            path.push(cube);
             while(radius--) {
-                cube = this.getNeighbor(cube, direction);
+                cube = this.getNeighbor(direction, cube);
                 path.push(cube);
             }
             return path;
@@ -369,12 +376,10 @@ HexagonGrid.prototype.coordinate = {
 HexagonGrid.prototype.getRing = function cubeRing(center, radius) {
     var direction = this.coordinate.cube.direction;
     var cube = this.coordinate.cube.follow(direction.southWest, radius, center).pop();
-    var result = [];
+    var result = [cube];
+    var line;
     for (var side = 0; side < 6; side++) {
-        for (var offset = 0; offset < radius; offset++) {
-            result.push(cube);
-            cube = this.coordinate.cube.getNeighbor(side, cube);
-        }
+        result = result.concat(this.coordinate.cube.follow(side, radius, result[result.length-1]));
     }
     result = result.map(this.coordinate.cube.convertToOddQ);
     return result;
