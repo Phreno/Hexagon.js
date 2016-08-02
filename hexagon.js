@@ -196,3 +196,23 @@ HexagonGrid.prototype.clickEvent = function (e) {
         this.drawHex(drawx, drawy - 6, "rgba(110,110,70,0.3)", "");
     } 
 };
+
+HexagonGrid.prototype.convertOddQ2Cubecoordinate = function convertOddQ2Cubecoordinate(col, row) {
+    var x = col;
+    var z = row - (col - (col&1)) / 2;
+    var y = -x-z;
+    return {
+        x: x,
+        z: z,
+        y: y
+    }
+}
+
+HexagonGrid.prototype.convertCube2OddQCoordinate = function convertCube2OddQCoordinate(x, y, z) {
+    var col = x;
+    var row = z + (x - (x&1)) / 2;
+    return {
+        col: col,
+        row: row
+    }
+}
