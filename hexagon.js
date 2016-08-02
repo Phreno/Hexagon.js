@@ -197,7 +197,7 @@ HexagonGrid.prototype.clickEvent = function (e) {
     } 
 };
 
-HexagonGrid.prototype.convertOddQ2Cubecoordinate = function convertOddQ2Cubecoordinate(col, row) {
+HexagonGrid.prototype.convertOddQ2Cube = function convertOddQ2Cubecoordinate(col, row) {
     var x = col;
     var z = row - (col - (col&1)) / 2;
     var y = -x-z;
@@ -208,11 +208,29 @@ HexagonGrid.prototype.convertOddQ2Cubecoordinate = function convertOddQ2Cubecoor
     }
 }
 
-HexagonGrid.prototype.convertCube2OddQCoordinate = function convertCube2OddQCoordinate(x, y, z) {
+HexagonGrid.prototype.convertCube2OddQ = function convertCube2OddQCoordinate(x, y, z) {
     var col = x;
     var row = z + (x - (x&1)) / 2;
     return {
         col: col,
         row: row
+    }
+}
+
+HexagonGrid.prototype.convertCube2Axial = function convertCube2Axial(x, z) {
+    return {
+        col: x,
+        row: z
+    }
+}
+
+HexagonGrid.prototype.convertAxial2Cube = function convertAxial2Cube(col, row) {
+    var x = q;
+    var z  = r;
+    var y = -x-z;
+    return {
+        x: x,
+        z: z,
+        y: y
     }
 }
