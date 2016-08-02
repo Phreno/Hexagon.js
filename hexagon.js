@@ -226,7 +226,7 @@ HexagonGrid.prototype.convertCube2Axial = function convertCube2Axial(x, z) {
 
 HexagonGrid.prototype.convertAxial2Cube = function convertAxial2Cube(col, row) {
     var x = q;
-    var z  = r;
+    var z = r;
     var y = -x-z;
     return {
         x: x,
