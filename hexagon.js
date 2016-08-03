@@ -47,11 +47,11 @@ HexagonGrid.prototype.drawHexGrid = function (rows, cols, originX, originY, isDe
     }
 };
 
-HexagonGrid.prototype.drawHexAtColRow = function(column, row, color) {
+HexagonGrid.prototype.drawHexAtColRow = function(column, row, color, debugText) {
     var drawy = column % 2 == 0 ? (row * this.height) + this.canvasOriginY : (row * this.height) + this.canvasOriginY + (this.height / 2);
     var drawx = (column * this.side) + this.canvasOriginX;
 
-    this.drawHex(drawx, drawy, color, "");
+    this.drawHex(drawx, drawy, color, debugText);
 };
 
 HexagonGrid.prototype.drawHex = function(x0, y0, fillColor, debugText) {
@@ -370,10 +370,11 @@ HexagonGrid.prototype.coordinate = {
 
 /**
  * Recupere un anneau.
- * @center le center de l anneau.
+ * @center le centre de l anneau en coordonnees cubiques.
  * @radius la taille du rayon.
+ * Retourne un tableau de coordonnees odd-q.
  * */
-HexagonGrid.prototype.getRing = function cubeRing(center, radius) {
+HexagonGrid.prototype.getRing = function getRing(center, radius) {
     var direction = this.coordinate.cube.direction;
     var cube = this.coordinate.cube.follow(direction.southWest, radius, center).pop();
     var result = [cube];
@@ -386,11 +387,29 @@ HexagonGrid.prototype.getRing = function cubeRing(center, radius) {
 }
 
 /**
+ * Recupere une spirale.
+ * @center le centre de l anneau en coordonnees cubiques.
+ * @radius la taille du rayon.
+ * Retourne un tableau en coordonnees odd-q.
+ * */
+HexagonGrid.prototype.getSpiral = function getSpiral(center, radius) {
+    var convertToOddQ = this.coordinate.cube.convertToOddQ;
+    var result = [convertToOddQ(center)];
+    for(var row = 1; row <= radius; row++) {
+        result = result.concat(this.getRing(center, row));
+    }
+    return result;
+}
+
+/**
  * Redessine un set de cellules.
  * @cells toutes les cellules a tracer.
  * */
 HexagonGrid.prototype.drawCells = function drawCells (cells) {
+    var cell = null;
     for(var index = 0; index < cells.length; index++) {
-        this.drawHexAtColRow(cells[index].col, cells[index].row, "#000");
-    };
+        cell = cells[index];
+        cell.color = "#F00";
+        this.drawHexAtColRow(cell.col, cell.row, cell.color, cell.value);
+    }
 }
