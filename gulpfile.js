@@ -39,7 +39,7 @@ var action = {
 gulp.task( action.TEST, function () {
   gulp
   .src( bundle.config.filter.spec  )
-  .pipe( jasmine() )
+  .pipe( jasmine( { verbose: true } ))
 });
 
 
@@ -63,6 +63,6 @@ gulp.task( action.BUILD, function () {
 gulp.task( action.WATCH, function () {
         gulp.watch( 
           [ bundle.config.filter.src, bundle.config.filter.spec ],  
-          [ action.BUILD ]
+          [ action.TEST, action.BUILD ]
         );
 });
