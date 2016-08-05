@@ -13,16 +13,20 @@ gulp = require( "gulp" )
  * Information sur le package.
  * */
 var about = {
-  template: fs.readFileSync( bundle.config.file.about ),
+  template: fs.readFileSync( bundle.config.file.about, "utf-8" ),
   data: {
     name: bundle.name,
     version: bundle.version,
-    author: bundle.author,
-    license: fs.readFileSync( bundle.config.file.license ) ,
+    author: bundle.author.name,
+    git: bundle.author.git,
+    twitter: bundle.author.twitter,
+    license: fs.readFileSync( bundle.config.file.license, "utf-8" ) ,
     repository: bundle.repository.url,
     more: "Forked from https://github.com/rrreese/Hexagon.js"
   }
 };
+
+console.log(JSON.stringify(about));
 
 /**
  * Liste des taches programmees.
