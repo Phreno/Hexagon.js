@@ -4,8 +4,19 @@ cursor =
   backward: -1
   position: 0
 
+
 class Coordinate
+  #     ORIENTATION FLAT
+  #
+  #            NORD
+  #  NORD EST   --   NORD OUEST 
+  #           /    \
+  #           \    /
+  #  SUD EST    --   SUD OUEST
+  #            SUD
+  #
   cubic:
+    # Offset des cases adjacentes
     pointTo:
       flat:
         north:
@@ -32,7 +43,19 @@ class Coordinate
             x: cursor.backward
             y: cursor.position
             z: cursor.forward
+
+    # Converti des coordonnees cubiques en coordonnees odd-q.
+    # @coord coordonnees cubiques.
+    toOddq: ( coord )->
+      col = coord.x
+      row = coord.z + ( coord.x - ( coord.x&1 )) / 2
+      oddq =
+        col: col
+        row: row
+
   oddq:
+    # Converti des coordonnees oddq en coordonnees cubiques.
+    # @coord coordonnees oddq.
     toCubic: ( coord )->
       x = coord.col
       z = coord.row - ( coord.col - ( coord.col&1 )) / 2

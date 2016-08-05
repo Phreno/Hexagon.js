@@ -68,6 +68,15 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
             }
           }
         }
+      },
+      toOddq: function(coord) {
+        var col, oddq, row;
+        col = coord.x;
+        row = coord.z + (coord.x - (coord.x & 1)) / 2;
+        return oddq = {
+          col: col,
+          row: row
+        };
       }
     };
 
@@ -89,6 +98,6 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
   })();
 
-  module.exports = coordinate;
+  module.exports = Coordinate;
 
 }).call(this);

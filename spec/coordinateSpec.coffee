@@ -47,8 +47,18 @@ describe "Coordinate", ->
           expect( south.west.y ).toBe +0
           expect( south.west.z ).toBe +1
 
-    #describe "toOddq", ->
-    # it "doit convertir des coordonnees cubic en coordonnees oddq."
+    describe "toOddq", ->
+      it "doit convertir des coordonnees cubic en coordonnees oddq", ->
+        # given
+        coord =
+          x: 10
+          y: -10
+          z: 0
+        # when
+        oddq = coordinate.cubic.toOddq coord
+        # then
+        expect( oddq.col ).toBe 10
+        expect( oddq.row ).toBe 5
 
   describe "oddq", ->
     describe "toCubic", ->
