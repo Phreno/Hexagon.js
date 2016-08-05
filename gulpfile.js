@@ -5,6 +5,8 @@ gulp = require( "gulp" )
 , coffee = require( "gulp-coffee" )
 , concat = require( "gulp-concat" )
 , header = require( "gulp-header" )
+, jasmine = require( "gulp-jasmine" )
+, coffeeScript = require("coffee-script/register")
 , bundle = require( "./package.json" ); 
 
 /**
@@ -27,8 +29,19 @@ var about = {
  * */
 var action = {
   BUILD: "build",
+  TEST: "test",
   WATCH: "watch"
 };
+
+/**
+ * Verification des specifications.
+ * */
+gulp.task( action.TEST, function () {
+  gulp
+  .src( bundle.config.filter.spec  )
+  .pipe( jasmine() )
+});
+
 
 /**
  * Generation du livrable.
