@@ -41,4 +41,4 @@ class Coordinate
         x: x
         z: z
         y: y
-module.exports = coordinate
+module.exports = Coordinate

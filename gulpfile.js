@@ -26,8 +26,6 @@ var about = {
   }
 };
 
-console.log(JSON.stringify(about));
-
 /**
  * Liste des taches programmees.
  * */
