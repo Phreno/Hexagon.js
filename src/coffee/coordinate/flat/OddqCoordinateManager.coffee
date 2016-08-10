@@ -9,3 +9,5 @@ class OddqCoordinateManager
       x: x
       z: z
       y: y
+
+module.exports = OddqCoordinateManager

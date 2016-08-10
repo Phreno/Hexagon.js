@@ -29,16 +29,17 @@
     "file": {
       "about": ".template/about",
       "license": "LICENSE",
-      "browserConcat": "src/concat.browser.coffee",
-      "browserGenerated": "hexaction.js",
-      "browserMinified": "hexaction.min.js"
+      "coffeeAll": "hexaction.generated.coffee",
+      "js": "hexaction.js",
+      "jsMinified": "hexaction.min.js"
     },
     "filter": {
-      "src": "src/coffee/*.coffee",
+      "src": "src/coffee/**/*.coffee",
       "spec": "spec/**/*.coffee"
     },
     "folder": {
-      "distBrowser": "dist/browser"
+      "src": "./src/",
+      "dist": "./dist/"
     }
   },
   "homepage": "https://github.com/Phreno/hexaction#readme",

@@ -1,5 +1,7 @@
 base = "../".repeat 3
-Manager = require "#{base}src/coordinate/flat/OddqCoordinateManager.coffee"
+folder = "src/coffee/coordinate/flat/"
+file = "OddqCoordinateManager.coffee"
+Manager = require "#{base}#{folder}#{file}"
 
 describe "(flat) OddqCoordinateManager", ->
   manager = new Manager

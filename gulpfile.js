@@ -32,29 +32,12 @@ var about = {
  * Liste des taches programmees.
  * */
 var action = {
-  BUILD_BROWSER       : "build:browser",
-  BUILD_DOCUMENTATION : "build:documentation",
-
-  CLEAN_DIST_BROWSER  : "clean:dist-browser",
-  CLEAN_SRC_BROWSER   : "clean:src-browser",
-  
-  CONCAT_SRC_BROWSER  : "concat:src-browser",
-
-  RENDER_DIST_BROWSER  : "render:dist-browser",
-
-  TEST: "test",
-  WATCH: "watch"
+  BUILD     : "build",
+  CLEAN     : "clean",
+  CONCAT    : "concat",
+  RENDER_JS : "render:js",
+  TEST      : "test"
 };
-
-
-/**
- * Generation de la documentation.
- * */
-gulp.task( action.BUILD_DOCUMENTATION, function () {
-  // TODO
-  console.log("todo");
-});
-
 
 /**
  * Verification des specifications.
@@ -68,54 +51,32 @@ gulp.task( action.TEST, function () {
 /**
  * Nettoyage du dossier de distribution.
  * */
-gulp.task( action.CLEAN_DIST_BROWSER, function () {
-  return del( bundle.config.folder.distBrowser );
-});
-
-
-/**
- * Nettoyage des sources coffee concatenees.
- * */
-gulp.task( action.CLEAN_SRC_BROWSER, function () {
-  return del( bundle.config.file.browserConcat );
+gulp.task( action.CLEAN, function () {
+  del( bundle.config.folder.dist );
+  del( bundle.config.folder.src + bundle.config.file.coffeeAll );
 });
 
 /**
  * Concatene les sources coffeescript.
  * */
-gulp.task( action.CONCAT_SRC_BROWSER, function () {
+gulp.task( action.CONCAT, function () {
   gulp
   .src( bundle.config.filter.src )
-  .pipe( concat( bundle.config.file.browserConcat ));
+  .pipe( concat( bundle.config.file.coffeeAll ))
+  .pipe( gulp.dest( bundle.config.folder.src ));
 });
 
 /**
  * Generation des sources du livrable pour un navigateur.
  * */
-gulp.task( action.RENDER_DIST_BROWSER, function () {
+gulp.task( action.RENDER_JS, function () {
   gulp
-  .src( bundle.config.file.browserConcat )
+  .src( bundle.config.folder.src + bundle.config.file.coffeeAll )
   .pipe( coffeeify() )
-  .pipe( gulp.dest( bundle.config.folder.distBrowser ));
+  .pipe( gulp.dest( bundle.config.folder.dist ));
 });
 
-
 /**
- * Operation de nettoyage et de construction des sources.
+ * Effectue toutes les operations de build.
  * */
-gulp.task( action.BUILD_BROWSER, [ 
-  action.CLEAN_DIST_BROWSER, 
-  action.CLEAN_SRC_BROWSER, 
-  action.CONCAT_SRC_BROWSER, 
-  action.RENDER_DIST_BROWSER ]);
-
-
-/**
- * Mise a jour du livrable.
- * */
-gulp.task( action.WATCH, function () {
-        gulp.watch( 
-          [ bundle.config.filter.src, bundle.config.filter.spec ],  
-          [ action.TEST, action.BUILD ]
-        );
-});
+gulp.task( action.BUILD, [ action.CLEAN, action.CONCAT, action.RENDER_JS ]);
