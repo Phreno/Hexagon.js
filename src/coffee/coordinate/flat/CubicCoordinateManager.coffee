@@ -1,81 +1,76 @@
-cursor = require "../cursor"
+c = require "../cursor"
+p = require "../priority"
+
 class CubicCoordinateManager
   offset:
+    southEast:
+      priority: p.SOUTH_EAST
+      x: c.forward
+      y: c.backward
+      z: c.position
+    northEast:
+      priority: p.NORTH_EAST
+      x: c.forward
+      y: c.position
+      z: c.backward
     north:
-      x: cursor.position
-      y: cursor.forward
-      z: cursor.backward
-      east:
-        x: cursor.forward
-        y: cursor.position
-        z: cursor.backward
-      west:
-        x: cursor.backward
-        y: cursor.forward
-        z: cursor.position
+      priority: p.NORTH
+      x: c.position
+      y: c.forward
+      z: c.backward
+    northWest:
+      priority: p.NORTH_WEST
+      x: c.backward
+      y: c.forward
+      z: c.position
+    southWest:
+      priority: p.SOUTH_WEST
+      x: c.backward
+      y: c.position
+      z: c.forward
     south:
-      x: cursor.position
-      y: cursor.backward
-      z: cursor.forward
-      east:
-        x: cursor.forward
-        y: cursor.backward
-        z: cursor.position
-      west:
-        x: cursor.backward
-        y: cursor.position
-        z: cursor.forward
+      priority: p.SOUTH
+      x: c.position
+      y: c.backward
+      z: c.forward
 
   # Converti des coordonnees cubiques en coordonnees odd-q.
   # @coord coordonnees cubiques.
   toOddq: ( coord )->
     col = coord.x
     row = coord.z + ( coord.x - ( coord.x&1 )) / 2
-    oddq =
-      col: col
-      row: row
+    oddq = col: col, row: row
 
   # Recupere le cube adjacent dans la direction donnee.
   # @offset du cote adjacent.
   # @coord cellule a partir de laquelle est effectue le pas de cote.
   stepAside: ( offset, coord )->
     side =
-      x: offset.x + coord.x,
-      y: offset.y + coord.y,
-      z: offset.z + coord.z
+      x: ( offset.x + coord.x )
+      y: ( offset.y + coord.y )
+      z: ( offset.z + coord.z )
 
   # Recupere les cases au voisinage.
-  # @coord cellule dont on veut recuperer les cases voisines
-  getNeighborhood: ( coord )->
-    neighbors = [
-      @stepAside( @offset.south.east, coord )
-      @stepAside( @offset.north.east, coord )
-      @stepAside( @offset.north, coord )
-      @stepAside( @offset.north.west, coord )
-      @stepAside( @offset.south.west, coord )
-      @stepAside( @offset.south, coord )
-    ]
-
-  # Recupere la case au voisinage dans la direction donnee.
-  # @direction cote par lequel on recupere le voisin.
-  # @coord cellule dont on veut recuperer le voisin.
-  getNeighbor: ( direction, coord )->
-    neighbor = null
-    switch typeof direction
-      when "number" then neighbor = ( @getNeighborhood coord )[ direction ]
-      when "object" then neighbor = @stepAside( direction, coord )
-      else console.log "err"
-    neighbor
+  # @origin coordonnee de la cellule dont on veut recuperer les cases voisines
+  getNeighborhood: ( origin )->
+    neighbors = []
+    nextStep = @stepAside
+    directions = @offset
+    Object
+      .keys directions
+      .forEach ( target )->
+        step = directions[ target ]
+        neighbors[ step.priority ] = nextStep step, origin
+    neighbors
 
   # Recupere le chemin a partir d une case dans une direction.
   # @direction cote par lequel par le chemin.
   # @steps longueur du chemin.
   # @origin depart du chemin.
-  follow: ( direction, steps, origin )->
-    path = []
-    while steps--
-      coord = this.getNeighbor direction, origin
-      path.push coord
+  follow: ( direction, steps, origin, path )->
+    path = [] if !path?
+    path.push ( @getNeighborhood origin )[ direction ]
+    @follow direction, steps, path[ path.length - 1 ], path if --steps
     path
 
 module.exports = CubicCoordinateManager
