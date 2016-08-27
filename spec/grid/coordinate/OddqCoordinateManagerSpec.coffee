@@ -1,5 +1,5 @@
 base = "../".repeat 3
-folder = "src/coffee/coordinate/flat/"
+folder = "src/coffee/grid/flat/"
 file = "OddqCoordinateManager.coffee"
 Manager = require "#{base}#{folder}#{file}"
 

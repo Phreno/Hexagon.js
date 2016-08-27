@@ -1,4 +1,4 @@
-# Priorite d'acces aux cases voisines
+ Priorite d'acces aux cases voisines
 priority =
   SOUTH_WEST: 0
   NORTH_WEST: 1

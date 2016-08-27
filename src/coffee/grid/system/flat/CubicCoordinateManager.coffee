@@ -1,5 +1,5 @@
-c = require "../cursor"
-p = require "../priority"
+c = require "../Cursor"
+p = require "./VerticePriority"
 
 class CubicCoordinateManager
   offset:
@@ -33,13 +33,6 @@ class CubicCoordinateManager
       x: c.position
       y: c.backward
       z: c.forward
-
-  # Converti des coordonnees cubiques en coordonnees odd-q.
-  # @coord coordonnees cubiques.
-  toOddq: ( coord )->
-    col = coord.x
-    row = coord.z + ( coord.x - ( coord.x&1 )) / 2
-    oddq = col: col, row: row
 
   # Recupere le cube adjacent dans la direction donnee.
   # @offset du cote adjacent.
