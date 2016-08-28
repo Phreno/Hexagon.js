@@ -1,5 +1,5 @@
- Priorite d'acces aux cases voisines
-priority =
+# Declaration explicite des vertex.
+side =
   SOUTH_WEST: 0
   NORTH_WEST: 1
   NORTH:      2
@@ -7,4 +7,4 @@ priority =
   SOUTH_EAST: 4
   SOUTH:      5
 
-module.exports = priority
+module.exports = side

@@ -1,9 +1,6 @@
-base = "../".repeat 3
-folder = "src/coffee/grid/flat/"
-file = "OddqCoordinateManager.coffee"
-Manager = require "#{base}#{folder}#{file}"
+Manager = require "./Oddq"
 
-describe "(flat) OddqCoordinateManager", ->
+describe "OddqGridManager", ->
   manager = new Manager
 
   describe "toCubic", ->

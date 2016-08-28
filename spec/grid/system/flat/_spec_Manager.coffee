@@ -1,10 +1,6 @@
-base = "../".repeat 3
-folder = "src/coffee/grid/system/oddq/"
-file = "CubicCoordinateManager.coffee"
+Manager = require "./Manager.coffee"
 
-Manager = require "#{base}#{folder}#{file}"
-
-describe "(flat) CubicCoordinateManager", ->
+describe "CubicCoordinateManager", ->
   manager = new Manager
   describe "offset", ->
 

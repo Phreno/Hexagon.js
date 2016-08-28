@@ -1,6 +1,6 @@
-GridCore = require "../../GridCore"
+GridCore = require "../../../GridCore"
 # Systeme de coordonnees oddq appliqué.
-class OddqGridManager extends GridCore
+class Oddq extends GridCore
   # Est-ce que la cellule se situe sur une colone soumise a un decalage ?
   #
   # @param oddq [object] coordonnees de la cellule.
@@ -102,3 +102,5 @@ class OddqGridManager extends GridCore
   #  b2 = ( @sign pt, v2, v3 ) < 0.0
   #  b3 = ( @sign pt, v3, v1 ) < 0.0
   #  ( b1 is b2 ) and ( b2 is b3 )
+
+module.exports = Oddq
