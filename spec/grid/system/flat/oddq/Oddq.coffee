@@ -12,7 +12,6 @@ class Oddq extends GridCore
   # Recupere les coordonnees de reference (x et y en pixel)
   # d'une cellule en fonction de sa position en oddq.
   #
-  # @note Sous le coin inferieur gauche de la cellule.
   # @param oddq [object] position en oddq.
   # @param oddq.row [int] index de la ligne sur la grille.
   # @param oddq.column [int] index de la colone sur la grille.

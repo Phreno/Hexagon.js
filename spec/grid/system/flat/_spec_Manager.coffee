@@ -1,72 +1,7 @@
 Manager = require "./Manager.coffee"
 
-describe "CubicCoordinateManager", ->
+describe "Manager", ->
   manager = new Manager
-  describe "offset", ->
-
-    it "doit pointer vers le nord", ->
-      # when
-      direction = manager.offset.north
-      # then
-      expected = x: 0, y: +1, z: -1
-      expect( direction.x ).toBe( expected.x )
-      expect( direction.y ).toBe( expected.y )
-      expect( direction.z ).toBe( expected.z )
-
-    it "doit pointer vers le nord-est", ->
-      # when
-      direction = manager.offset.northEast
-      # then
-      expected = x: +1, y: 0, z: -1
-      expect( direction.x ).toBe( expected.x )
-      expect( direction.y ).toBe( expected.y )
-      expect( direction.z ).toBe( expected.z )
-
-    it "doit pointer vers le nord-ouest", ->
-      # when
-      direction = manager.offset.northWest
-      # then
-      expected = x: -1, y: +1, z: 0
-      expect( direction.x ).toBe( expected.x )
-      expect( direction.y ).toBe( expected.y )
-      expect( direction.z ).toBe( expected.z )
-
-    it "doit pointer vers le sud", ->
-      # when
-      direction = manager.offset.south
-      # then
-      expected = x: 0, y: -1, z: +1
-      expect( direction.x ).toBe( expected.x )
-      expect( direction.y ).toBe( expected.y )
-      expect( direction.z ).toBe( expected.z )
-
-    it "doit pointer vers le sud-est", ->
-      # when
-      direction = manager.offset.southEast
-      # then
-      expected = x: +1, y: -1, z: 0
-      expect( direction.x ).toBe( expected.x )
-      expect( direction.y ).toBe( expected.y )
-      expect( direction.z ).toBe( expected.z )
-
-    it "doit pointer vers le sud-ouest", ->
-      direction = manager.offset.southWest
-      # then
-      expected = x: -1, y: 0, z: +1
-      expect( direction.x ).toBe( expected.x )
-      expect( direction.y ).toBe( expected.y )
-      expect( direction.z ).toBe( expected.z )
-
-  describe "toOddq", ->
-    it "doit convertir des coordonnees cubic en coordonnees oddq", ->
-      # given
-      coord = x: 10, y: -10, z: 0
-      # when
-      oddq = manager.toOddq coord
-      # then
-      expected = col: 10, row: 5
-      expect( JSON.stringify oddq ).toBe( JSON.stringify expected )
-      expect( oddq.row ).toBe 5
 
   describe "stepAside", ->
     it "doit ajouter a la coordonnee l'offset passe en parametre", ->

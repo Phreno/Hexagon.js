@@ -6,10 +6,7 @@ describe "Converter", ->
   describe "cubicToOddq", ->
     it "doit convertir des coordonnees cubic en coordonnees oddq", ->
       # given
-      cubic =
-        x: 10
-        y: -10
-        z: 0
+      cubic = x: 10, y: -10, z: 0
       # when
       oddq = converter.cubicToOddq cubic
       # then
@@ -19,9 +16,7 @@ describe "Converter", ->
   describe "oddqToCubic", ->
     it "doit convertir des coordonnees oddq en coordonnees cubic", ->
       # given
-      oddq =
-        col: 10
-        row: 5
+      oddq = col: 10, row: 5
       # when
       cubic = converter.oddqToCubic oddq
       # then
