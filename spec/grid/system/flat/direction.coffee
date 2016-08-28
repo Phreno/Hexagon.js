@@ -2,7 +2,7 @@ side = require "./side"
 cursor = require "../../cursor"
 
 # Liste des directions accessibles depuis une cellule.
-direction:
+direction =
   southEast:
     priority: side.SOUTH_EAST
     x: cursor.forward
@@ -33,3 +33,5 @@ direction:
     x: cursor.position
     y: cursor.backward
     z: cursor.forward
+
+module.exports = direction

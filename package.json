@@ -27,7 +27,7 @@
   },
   "config": {
     "file": {
-      "about": ".template/about",
+      "about": ".template/about.md",
       "license": "LICENSE.md",
       "coffeeAll": "hexaction.generated.coffee",
       "js": "hexaction.js",
