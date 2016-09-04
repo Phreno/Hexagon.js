@@ -1,5 +1,5 @@
 class Manager
-  # Recupere la cellule adjacente dans la direction donnee.
+  # Ajoute un decalage coordonnee à coordonnee a la cellule.
   #
   # @param offset [cubic] coordonnee a ajouter a start.
   # @param start [cubic] coordonnee de depart.
@@ -10,19 +10,25 @@ class Manager
       z: ( start.z + offset.z )
 
   # Recupere les cases au voisinage.
+  #
   # @param origin [cubic] cellule dont on veut recuperer les cases voisines
   getNeighborhood: ( origin )->
     neighbors = []
     next = @walk
-    directions = require "direction"
+    directions = require "./direction"
     Object
       .keys directions
       .forEach ( target )->
         neighbor = directions[ target ]
-        neighbors[ step.priority ] = next neighbor, origin
+        console.log "neighbor"
+        console.log neighbor
+        console.log "neighbors"
+        console.log neighbors
+        neighbors[ target.priority ] = next neighbor, origin
     neighbors
 
   # Recupere le chemin a partir d une case dans une direction.
+  #
   # @direction cote par lequel par le chemin.
   # @steps longueur du chemin.
   # @origin depart du chemin.
