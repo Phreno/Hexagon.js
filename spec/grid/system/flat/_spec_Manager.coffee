@@ -47,6 +47,8 @@ describe "Manager", ->
         x: offset.SOUTH.x
         y: offset.SOUTH.y
         z: offset.SOUTH.z
+
+      console.log JSON.stringify expected, null, 2
       expect( JSON.stringify neighborhood ).toBe JSON.stringify expected
 
   describe "follow", ->

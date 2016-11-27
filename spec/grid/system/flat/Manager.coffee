@@ -1,3 +1,7 @@
+winston = require 'winston'
+winston.level = 'debug'
+pretty = require 'prettyprint'
+
 class Manager
   # Ajoute un decalage coordonnee à coordonnee a la cellule.
   #
@@ -13,18 +17,20 @@ class Manager
   #
   # @param origin [cubic] cellule dont on veut recuperer les cases voisines
   getNeighborhood: ( origin )->
+    winston.log 'debug' , 'getNeighborhood'
+    winston.log 'debug' , "... origin: #{JSON.stringify origin, null, 2}"
+
     neighbors = []
     next = @walk
     directions = require "./direction"
+
     Object
       .keys directions
       .forEach ( target )->
         neighbor = directions[ target ]
-        console.log "neighbor"
-        console.log neighbor
-        console.log "neighbors"
-        console.log neighbors
-        neighbors[ target.priority ] = next neighbor, origin
+        neighbors[ neighbor.priority ] = next neighbor, origin
+
+    winston.log 'debug' , "... neighbors: #{JSON.stringify neighbors, null, 2}"
     neighbors
 
   # Recupere le chemin a partir d une case dans une direction.
