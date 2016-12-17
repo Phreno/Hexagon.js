@@ -1,7 +1,11 @@
 Manager = require "./Manager.coffee"
 
 describe "Manager", ->
+  # object a tester
   manager = new Manager
+
+  # dépendance
+  directions = require "./direction.coffee"
 
   describe "walk", ->
     it "doit ajouter a la coordonnee l'offset passe en parametre", ->
@@ -24,31 +28,30 @@ describe "Manager", ->
       # then
       expected = []
       expected.push
-        x: offset.SOUTH_WEST.x
-        y: offset.SOUTH_WEST.y
-        z: offset.SOUTH_WEST.z
+        x: directions.southWest.x
+        y: directions.southWest.y
+        z: directions.southWest.z
       expected.push
-        x: offset.NORTH_WEST.x
-        y: offset.NORTH_WEST.y
-        z: offset.NORTH_WEST.z
+        x: directions.northWest.x
+        y: directions.northWest.y
+        z: directions.northWest.z
       expected.push
-        x: offset.NORTH.x
-        y: offset.NORTH.y
-        z: offset.NORTH.z
+        x: directions.north.x
+        y: directions.north.y
+        z: directions.north.z
       expected.push
-        x: offset.NORTH_EAST.x
-        y: offset.NORTH_EAST.y
-        z: offset.NORTH_EAST.z
+        x: directions.northEast.x
+        y: directions.northEast.y
+        z: directions.northEast.z
       expected.push
-        x: offset.SOUTH_EAST.x
-        y: offset.SOUTH_EAST.y
-        z: offset.SOUTH_EAST.z
+        x: directions.southEast.x
+        y: directions.southEast.y
+        z: directions.southEast.z
       expected.push
-        x: offset.SOUTH.x
-        y: offset.SOUTH.y
-        z: offset.SOUTH.z
+        x: directions.south.x
+        y: directions.south.y
+        z: directions.south.z
 
-      console.log JSON.stringify expected, null, 2
       expect( JSON.stringify neighborhood ).toBe JSON.stringify expected
 
   describe "follow", ->
@@ -56,7 +59,7 @@ describe "Manager", ->
     steps = 5
     it "doit recuperer une ligne de cellule en direction du sud-ouest", ->
       # given
-      direction = manager.offset.SOUTH_EAST.priority
+      direction = directions.southWest.priority
       # when
       path = manager.follow( direction, steps, origin )
       # then
