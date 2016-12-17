@@ -57,6 +57,7 @@ describe "Manager", ->
   describe "follow", ->
     origin = x: 0, y: 0, z: 0
     steps = 5
+
     it "doit recuperer une ligne de cellule en direction du sud-ouest", ->
       # given
       direction = directions.southWest.priority
@@ -71,3 +72,68 @@ describe "Manager", ->
         ( x:-5, y:0, z:+5 )
       ]
       expect( JSON.stringify path ).toBe JSON.stringify expected
+
+    it "doit recuperer une ligne de cellule en direction du nord-ouest", ->
+      # given
+      direction = directions.northWest.priority
+      # when
+      path = manager.follow( direction, steps, origin )
+      # then
+      expected = [
+        ( x:-1, y:+1, z:0 ),
+        ( x:-2, y:+2, z:0 ),
+        ( x:-3, y:+3, z:0 ),
+        ( x:-4, y:+4, z:0 ),
+        ( x:-5, y:+5, z:0 ),
+      ]
+      expect( JSON.stringify path ).toBe JSON.stringify expected
+
+    it "doit recuperer une ligne de cellule en direction du nord", ->
+      direction = directions.north.priority
+      path = manager.follow( direction, steps, origin )
+      expected = [
+        ( x:0, y:+1, z:-1 ),
+        ( x:0, y:+2, z:-2 ),
+        ( x:0, y:+3, z:-3 ),
+        ( x:0, y:+4, z:-4 ),
+        ( x:0, y:+5, z:-5 ),
+      ]
+      expect( JSON.stringify path ).toBe JSON.stringify expected
+
+    it "doit recuperer une ligne de cellule en direction du nord-est", ->
+      direction = directions.northEast.priority
+      path = manager.follow( direction, steps, origin )
+      expected = [
+        ( x:+1, y:0, z:-1 ),
+        ( x:+2, y:0, z:-2 ),
+        ( x:+3, y:0, z:-3 ),
+        ( x:+4, y:0, z:-4 ),
+        ( x:+5, y:0, z:-5 ),
+      ]
+      expect( JSON.stringify path ).toBe JSON.stringify expected
+
+    it "doit recuperer une ligne de cellule en direction du sud-est", ->
+      direction = directions.southEast.priority
+      path = manager.follow( direction, steps, origin )
+      expected = [
+        ( x:+1, y:-1, z:0 ),
+        ( x:+2, y:-2, z:0 ),
+        ( x:+3, y:-3, z:0 ),
+        ( x:+4, y:-4, z:0 ),
+        ( x:+5, y:-5, z:0 ),
+      ]
+      expect( JSON.stringify path ).toBe JSON.stringify expected
+
+    it "doit recuperer une ligne de cellule en direction du sud", ->
+      direction = directions.south.priority
+      path = manager.follow( direction, steps, origin )
+      expected = [
+        ( x:0, y:-1, z:+1 ),
+        ( x:0, y:-2, z:+2 ),
+        ( x:0, y:-3, z:+3 ),
+        ( x:0, y:-4, z:+4 ),
+        ( x:0, y:-5, z:+5 ),
+      ]
+      expect( JSON.stringify path ).toBe JSON.stringify expected
+
+
