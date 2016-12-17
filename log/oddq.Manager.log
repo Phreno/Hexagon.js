@@ -1240,3 +1240,229 @@
 {"level":"silly","message":"... offset: {\"priority\":5,\"x\":0,\"y\":-1,\"z\":1}","timestamp":"2016-12-17T14:33:58.087Z"}
 {"level":"silly","message":"... start: {\"x\":-4,\"y\":0,\"z\":4}","timestamp":"2016-12-17T14:33:58.087Z"}
 {"level":"silly","message":"... neighbors: [{\"x\":-5,\"y\":0,\"z\":5},{\"x\":-5,\"y\":1,\"z\":4},{\"x\":-4,\"y\":1,\"z\":3},{\"x\":-3,\"y\":0,\"z\":3},{\"x\":-3,\"y\":-1,\"z\":4},{\"x\":-4,\"y\":-1,\"z\":5}]","timestamp":"2016-12-17T14:33:58.087Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.887Z"}
+{"level":"silly","message":"... offset: {\"x\":2,\"y\":3,\"z\":4}","timestamp":"2016-12-17T14:44:15.890Z"}
+{"level":"silly","message":"... start: {\"x\":1,\"y\":2,\"z\":3}","timestamp":"2016-12-17T14:44:15.890Z"}
+{"level":"debug","message":"getNeighborhood","timestamp":"2016-12-17T14:44:15.893Z"}
+{"level":"silly","message":"... origin: {\"x\":0,\"y\":0,\"z\":0}","timestamp":"2016-12-17T14:44:15.893Z"}
+{"level":"silly","message":"... target: \"southWest\"","timestamp":"2016-12-17T14:44:15.894Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":0,\"x\":-1,\"y\":0,\"z\":1}","timestamp":"2016-12-17T14:44:15.894Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.894Z"}
+{"level":"silly","message":"... offset: {\"priority\":0,\"x\":-1,\"y\":0,\"z\":1}","timestamp":"2016-12-17T14:44:15.894Z"}
+{"level":"silly","message":"... start: {\"x\":0,\"y\":0,\"z\":0}","timestamp":"2016-12-17T14:44:15.894Z"}
+{"level":"silly","message":"... target: \"northWest\"","timestamp":"2016-12-17T14:44:15.894Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":1,\"x\":-1,\"y\":1,\"z\":0}","timestamp":"2016-12-17T14:44:15.894Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.894Z"}
+{"level":"silly","message":"... offset: {\"priority\":1,\"x\":-1,\"y\":1,\"z\":0}","timestamp":"2016-12-17T14:44:15.894Z"}
+{"level":"silly","message":"... start: {\"x\":0,\"y\":0,\"z\":0}","timestamp":"2016-12-17T14:44:15.894Z"}
+{"level":"silly","message":"... target: \"north\"","timestamp":"2016-12-17T14:44:15.894Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":2,\"x\":0,\"y\":1,\"z\":-1}","timestamp":"2016-12-17T14:44:15.894Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.894Z"}
+{"level":"silly","message":"... offset: {\"priority\":2,\"x\":0,\"y\":1,\"z\":-1}","timestamp":"2016-12-17T14:44:15.895Z"}
+{"level":"silly","message":"... start: {\"x\":0,\"y\":0,\"z\":0}","timestamp":"2016-12-17T14:44:15.895Z"}
+{"level":"silly","message":"... target: \"northEast\"","timestamp":"2016-12-17T14:44:15.895Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":3,\"x\":1,\"y\":0,\"z\":-1}","timestamp":"2016-12-17T14:44:15.895Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.895Z"}
+{"level":"silly","message":"... offset: {\"priority\":3,\"x\":1,\"y\":0,\"z\":-1}","timestamp":"2016-12-17T14:44:15.895Z"}
+{"level":"silly","message":"... start: {\"x\":0,\"y\":0,\"z\":0}","timestamp":"2016-12-17T14:44:15.895Z"}
+{"level":"silly","message":"... target: \"southEast\"","timestamp":"2016-12-17T14:44:15.895Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":4,\"x\":1,\"y\":-1,\"z\":0}","timestamp":"2016-12-17T14:44:15.895Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.895Z"}
+{"level":"silly","message":"... offset: {\"priority\":4,\"x\":1,\"y\":-1,\"z\":0}","timestamp":"2016-12-17T14:44:15.895Z"}
+{"level":"silly","message":"... start: {\"x\":0,\"y\":0,\"z\":0}","timestamp":"2016-12-17T14:44:15.895Z"}
+{"level":"silly","message":"... target: \"south\"","timestamp":"2016-12-17T14:44:15.895Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":5,\"x\":0,\"y\":-1,\"z\":1}","timestamp":"2016-12-17T14:44:15.895Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.895Z"}
+{"level":"silly","message":"... offset: {\"priority\":5,\"x\":0,\"y\":-1,\"z\":1}","timestamp":"2016-12-17T14:44:15.896Z"}
+{"level":"silly","message":"... start: {\"x\":0,\"y\":0,\"z\":0}","timestamp":"2016-12-17T14:44:15.896Z"}
+{"level":"silly","message":"... neighbors: [{\"x\":-1,\"y\":0,\"z\":1},{\"x\":-1,\"y\":1,\"z\":0},{\"x\":0,\"y\":1,\"z\":-1},{\"x\":1,\"y\":0,\"z\":-1},{\"x\":1,\"y\":-1,\"z\":0},{\"x\":0,\"y\":-1,\"z\":1}]","timestamp":"2016-12-17T14:44:15.896Z"}
+{"level":"debug","message":"follow","timestamp":"2016-12-17T14:44:15.897Z"}
+{"level":"silly","message":"... direction: 0","timestamp":"2016-12-17T14:44:15.897Z"}
+{"level":"silly","message":"... steps: 5","timestamp":"2016-12-17T14:44:15.897Z"}
+{"level":"silly","message":"... origin: {\"x\":0,\"y\":0,\"z\":0}","timestamp":"2016-12-17T14:44:15.897Z"}
+{"level":"silly","message":"... path: undefined","timestamp":"2016-12-17T14:44:15.898Z"}
+{"level":"debug","message":"getNeighborhood","timestamp":"2016-12-17T14:44:15.898Z"}
+{"level":"silly","message":"... origin: {\"x\":0,\"y\":0,\"z\":0}","timestamp":"2016-12-17T14:44:15.903Z"}
+{"level":"silly","message":"... target: \"southWest\"","timestamp":"2016-12-17T14:44:15.903Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":0,\"x\":-1,\"y\":0,\"z\":1}","timestamp":"2016-12-17T14:44:15.903Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.903Z"}
+{"level":"silly","message":"... offset: {\"priority\":0,\"x\":-1,\"y\":0,\"z\":1}","timestamp":"2016-12-17T14:44:15.903Z"}
+{"level":"silly","message":"... start: {\"x\":0,\"y\":0,\"z\":0}","timestamp":"2016-12-17T14:44:15.903Z"}
+{"level":"silly","message":"... target: \"northWest\"","timestamp":"2016-12-17T14:44:15.903Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":1,\"x\":-1,\"y\":1,\"z\":0}","timestamp":"2016-12-17T14:44:15.903Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.903Z"}
+{"level":"silly","message":"... offset: {\"priority\":1,\"x\":-1,\"y\":1,\"z\":0}","timestamp":"2016-12-17T14:44:15.903Z"}
+{"level":"silly","message":"... start: {\"x\":0,\"y\":0,\"z\":0}","timestamp":"2016-12-17T14:44:15.904Z"}
+{"level":"silly","message":"... target: \"north\"","timestamp":"2016-12-17T14:44:15.904Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":2,\"x\":0,\"y\":1,\"z\":-1}","timestamp":"2016-12-17T14:44:15.904Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.904Z"}
+{"level":"silly","message":"... offset: {\"priority\":2,\"x\":0,\"y\":1,\"z\":-1}","timestamp":"2016-12-17T14:44:15.904Z"}
+{"level":"silly","message":"... start: {\"x\":0,\"y\":0,\"z\":0}","timestamp":"2016-12-17T14:44:15.904Z"}
+{"level":"silly","message":"... target: \"northEast\"","timestamp":"2016-12-17T14:44:15.904Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":3,\"x\":1,\"y\":0,\"z\":-1}","timestamp":"2016-12-17T14:44:15.904Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.904Z"}
+{"level":"silly","message":"... offset: {\"priority\":3,\"x\":1,\"y\":0,\"z\":-1}","timestamp":"2016-12-17T14:44:15.904Z"}
+{"level":"silly","message":"... start: {\"x\":0,\"y\":0,\"z\":0}","timestamp":"2016-12-17T14:44:15.904Z"}
+{"level":"silly","message":"... target: \"southEast\"","timestamp":"2016-12-17T14:44:15.904Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":4,\"x\":1,\"y\":-1,\"z\":0}","timestamp":"2016-12-17T14:44:15.904Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.905Z"}
+{"level":"silly","message":"... offset: {\"priority\":4,\"x\":1,\"y\":-1,\"z\":0}","timestamp":"2016-12-17T14:44:15.905Z"}
+{"level":"silly","message":"... start: {\"x\":0,\"y\":0,\"z\":0}","timestamp":"2016-12-17T14:44:15.905Z"}
+{"level":"silly","message":"... target: \"south\"","timestamp":"2016-12-17T14:44:15.905Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":5,\"x\":0,\"y\":-1,\"z\":1}","timestamp":"2016-12-17T14:44:15.905Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.905Z"}
+{"level":"silly","message":"... offset: {\"priority\":5,\"x\":0,\"y\":-1,\"z\":1}","timestamp":"2016-12-17T14:44:15.905Z"}
+{"level":"silly","message":"... start: {\"x\":0,\"y\":0,\"z\":0}","timestamp":"2016-12-17T14:44:15.905Z"}
+{"level":"silly","message":"... neighbors: [{\"x\":-1,\"y\":0,\"z\":1},{\"x\":-1,\"y\":1,\"z\":0},{\"x\":0,\"y\":1,\"z\":-1},{\"x\":1,\"y\":0,\"z\":-1},{\"x\":1,\"y\":-1,\"z\":0},{\"x\":0,\"y\":-1,\"z\":1}]","timestamp":"2016-12-17T14:44:15.905Z"}
+{"level":"debug","message":"follow","timestamp":"2016-12-17T14:44:15.905Z"}
+{"level":"silly","message":"... direction: 0","timestamp":"2016-12-17T14:44:15.905Z"}
+{"level":"silly","message":"... steps: 4","timestamp":"2016-12-17T14:44:15.905Z"}
+{"level":"silly","message":"... origin: {\"x\":-1,\"y\":0,\"z\":1}","timestamp":"2016-12-17T14:44:15.905Z"}
+{"level":"silly","message":"... path: [{\"x\":-1,\"y\":0,\"z\":1}]","timestamp":"2016-12-17T14:44:15.905Z"}
+{"level":"debug","message":"getNeighborhood","timestamp":"2016-12-17T14:44:15.905Z"}
+{"level":"silly","message":"... origin: {\"x\":-1,\"y\":0,\"z\":1}","timestamp":"2016-12-17T14:44:15.906Z"}
+{"level":"silly","message":"... target: \"southWest\"","timestamp":"2016-12-17T14:44:15.906Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":0,\"x\":-1,\"y\":0,\"z\":1}","timestamp":"2016-12-17T14:44:15.906Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.906Z"}
+{"level":"silly","message":"... offset: {\"priority\":0,\"x\":-1,\"y\":0,\"z\":1}","timestamp":"2016-12-17T14:44:15.906Z"}
+{"level":"silly","message":"... start: {\"x\":-1,\"y\":0,\"z\":1}","timestamp":"2016-12-17T14:44:15.906Z"}
+{"level":"silly","message":"... target: \"northWest\"","timestamp":"2016-12-17T14:44:15.906Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":1,\"x\":-1,\"y\":1,\"z\":0}","timestamp":"2016-12-17T14:44:15.906Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.906Z"}
+{"level":"silly","message":"... offset: {\"priority\":1,\"x\":-1,\"y\":1,\"z\":0}","timestamp":"2016-12-17T14:44:15.906Z"}
+{"level":"silly","message":"... start: {\"x\":-1,\"y\":0,\"z\":1}","timestamp":"2016-12-17T14:44:15.906Z"}
+{"level":"silly","message":"... target: \"north\"","timestamp":"2016-12-17T14:44:15.906Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":2,\"x\":0,\"y\":1,\"z\":-1}","timestamp":"2016-12-17T14:44:15.906Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.906Z"}
+{"level":"silly","message":"... offset: {\"priority\":2,\"x\":0,\"y\":1,\"z\":-1}","timestamp":"2016-12-17T14:44:15.906Z"}
+{"level":"silly","message":"... start: {\"x\":-1,\"y\":0,\"z\":1}","timestamp":"2016-12-17T14:44:15.907Z"}
+{"level":"silly","message":"... target: \"northEast\"","timestamp":"2016-12-17T14:44:15.907Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":3,\"x\":1,\"y\":0,\"z\":-1}","timestamp":"2016-12-17T14:44:15.907Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.907Z"}
+{"level":"silly","message":"... offset: {\"priority\":3,\"x\":1,\"y\":0,\"z\":-1}","timestamp":"2016-12-17T14:44:15.907Z"}
+{"level":"silly","message":"... start: {\"x\":-1,\"y\":0,\"z\":1}","timestamp":"2016-12-17T14:44:15.907Z"}
+{"level":"silly","message":"... target: \"southEast\"","timestamp":"2016-12-17T14:44:15.907Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":4,\"x\":1,\"y\":-1,\"z\":0}","timestamp":"2016-12-17T14:44:15.907Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.907Z"}
+{"level":"silly","message":"... offset: {\"priority\":4,\"x\":1,\"y\":-1,\"z\":0}","timestamp":"2016-12-17T14:44:15.907Z"}
+{"level":"silly","message":"... start: {\"x\":-1,\"y\":0,\"z\":1}","timestamp":"2016-12-17T14:44:15.907Z"}
+{"level":"silly","message":"... target: \"south\"","timestamp":"2016-12-17T14:44:15.908Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":5,\"x\":0,\"y\":-1,\"z\":1}","timestamp":"2016-12-17T14:44:15.908Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.908Z"}
+{"level":"silly","message":"... offset: {\"priority\":5,\"x\":0,\"y\":-1,\"z\":1}","timestamp":"2016-12-17T14:44:15.908Z"}
+{"level":"silly","message":"... start: {\"x\":-1,\"y\":0,\"z\":1}","timestamp":"2016-12-17T14:44:15.908Z"}
+{"level":"silly","message":"... neighbors: [{\"x\":-2,\"y\":0,\"z\":2},{\"x\":-2,\"y\":1,\"z\":1},{\"x\":-1,\"y\":1,\"z\":0},{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":-1,\"z\":1},{\"x\":-1,\"y\":-1,\"z\":2}]","timestamp":"2016-12-17T14:44:15.908Z"}
+{"level":"debug","message":"follow","timestamp":"2016-12-17T14:44:15.908Z"}
+{"level":"silly","message":"... direction: 0","timestamp":"2016-12-17T14:44:15.908Z"}
+{"level":"silly","message":"... steps: 3","timestamp":"2016-12-17T14:44:15.908Z"}
+{"level":"silly","message":"... origin: {\"x\":-2,\"y\":0,\"z\":2}","timestamp":"2016-12-17T14:44:15.908Z"}
+{"level":"silly","message":"... path: [{\"x\":-1,\"y\":0,\"z\":1},{\"x\":-2,\"y\":0,\"z\":2}]","timestamp":"2016-12-17T14:44:15.908Z"}
+{"level":"debug","message":"getNeighborhood","timestamp":"2016-12-17T14:44:15.908Z"}
+{"level":"silly","message":"... origin: {\"x\":-2,\"y\":0,\"z\":2}","timestamp":"2016-12-17T14:44:15.908Z"}
+{"level":"silly","message":"... target: \"southWest\"","timestamp":"2016-12-17T14:44:15.909Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":0,\"x\":-1,\"y\":0,\"z\":1}","timestamp":"2016-12-17T14:44:15.909Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.909Z"}
+{"level":"silly","message":"... offset: {\"priority\":0,\"x\":-1,\"y\":0,\"z\":1}","timestamp":"2016-12-17T14:44:15.909Z"}
+{"level":"silly","message":"... start: {\"x\":-2,\"y\":0,\"z\":2}","timestamp":"2016-12-17T14:44:15.909Z"}
+{"level":"silly","message":"... target: \"northWest\"","timestamp":"2016-12-17T14:44:15.909Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":1,\"x\":-1,\"y\":1,\"z\":0}","timestamp":"2016-12-17T14:44:15.909Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.909Z"}
+{"level":"silly","message":"... offset: {\"priority\":1,\"x\":-1,\"y\":1,\"z\":0}","timestamp":"2016-12-17T14:44:15.909Z"}
+{"level":"silly","message":"... start: {\"x\":-2,\"y\":0,\"z\":2}","timestamp":"2016-12-17T14:44:15.910Z"}
+{"level":"silly","message":"... target: \"north\"","timestamp":"2016-12-17T14:44:15.910Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":2,\"x\":0,\"y\":1,\"z\":-1}","timestamp":"2016-12-17T14:44:15.910Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.912Z"}
+{"level":"silly","message":"... offset: {\"priority\":2,\"x\":0,\"y\":1,\"z\":-1}","timestamp":"2016-12-17T14:44:15.913Z"}
+{"level":"silly","message":"... start: {\"x\":-2,\"y\":0,\"z\":2}","timestamp":"2016-12-17T14:44:15.913Z"}
+{"level":"silly","message":"... target: \"northEast\"","timestamp":"2016-12-17T14:44:15.913Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":3,\"x\":1,\"y\":0,\"z\":-1}","timestamp":"2016-12-17T14:44:15.913Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.913Z"}
+{"level":"silly","message":"... offset: {\"priority\":3,\"x\":1,\"y\":0,\"z\":-1}","timestamp":"2016-12-17T14:44:15.913Z"}
+{"level":"silly","message":"... start: {\"x\":-2,\"y\":0,\"z\":2}","timestamp":"2016-12-17T14:44:15.913Z"}
+{"level":"silly","message":"... target: \"southEast\"","timestamp":"2016-12-17T14:44:15.913Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":4,\"x\":1,\"y\":-1,\"z\":0}","timestamp":"2016-12-17T14:44:15.913Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.913Z"}
+{"level":"silly","message":"... offset: {\"priority\":4,\"x\":1,\"y\":-1,\"z\":0}","timestamp":"2016-12-17T14:44:15.913Z"}
+{"level":"silly","message":"... start: {\"x\":-2,\"y\":0,\"z\":2}","timestamp":"2016-12-17T14:44:15.914Z"}
+{"level":"silly","message":"... target: \"south\"","timestamp":"2016-12-17T14:44:15.914Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":5,\"x\":0,\"y\":-1,\"z\":1}","timestamp":"2016-12-17T14:44:15.914Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.914Z"}
+{"level":"silly","message":"... offset: {\"priority\":5,\"x\":0,\"y\":-1,\"z\":1}","timestamp":"2016-12-17T14:44:15.914Z"}
+{"level":"silly","message":"... start: {\"x\":-2,\"y\":0,\"z\":2}","timestamp":"2016-12-17T14:44:15.914Z"}
+{"level":"silly","message":"... neighbors: [{\"x\":-3,\"y\":0,\"z\":3},{\"x\":-3,\"y\":1,\"z\":2},{\"x\":-2,\"y\":1,\"z\":1},{\"x\":-1,\"y\":0,\"z\":1},{\"x\":-1,\"y\":-1,\"z\":2},{\"x\":-2,\"y\":-1,\"z\":3}]","timestamp":"2016-12-17T14:44:15.914Z"}
+{"level":"debug","message":"follow","timestamp":"2016-12-17T14:44:15.914Z"}
+{"level":"silly","message":"... direction: 0","timestamp":"2016-12-17T14:44:15.914Z"}
+{"level":"silly","message":"... steps: 2","timestamp":"2016-12-17T14:44:15.914Z"}
+{"level":"silly","message":"... origin: {\"x\":-3,\"y\":0,\"z\":3}","timestamp":"2016-12-17T14:44:15.914Z"}
+{"level":"silly","message":"... path: [{\"x\":-1,\"y\":0,\"z\":1},{\"x\":-2,\"y\":0,\"z\":2},{\"x\":-3,\"y\":0,\"z\":3}]","timestamp":"2016-12-17T14:44:15.914Z"}
+{"level":"debug","message":"getNeighborhood","timestamp":"2016-12-17T14:44:15.914Z"}
+{"level":"silly","message":"... origin: {\"x\":-3,\"y\":0,\"z\":3}","timestamp":"2016-12-17T14:44:15.914Z"}
+{"level":"silly","message":"... target: \"southWest\"","timestamp":"2016-12-17T14:44:15.914Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":0,\"x\":-1,\"y\":0,\"z\":1}","timestamp":"2016-12-17T14:44:15.915Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.915Z"}
+{"level":"silly","message":"... offset: {\"priority\":0,\"x\":-1,\"y\":0,\"z\":1}","timestamp":"2016-12-17T14:44:15.915Z"}
+{"level":"silly","message":"... start: {\"x\":-3,\"y\":0,\"z\":3}","timestamp":"2016-12-17T14:44:15.915Z"}
+{"level":"silly","message":"... target: \"northWest\"","timestamp":"2016-12-17T14:44:15.915Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":1,\"x\":-1,\"y\":1,\"z\":0}","timestamp":"2016-12-17T14:44:15.915Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.915Z"}
+{"level":"silly","message":"... offset: {\"priority\":1,\"x\":-1,\"y\":1,\"z\":0}","timestamp":"2016-12-17T14:44:15.915Z"}
+{"level":"silly","message":"... start: {\"x\":-3,\"y\":0,\"z\":3}","timestamp":"2016-12-17T14:44:15.915Z"}
+{"level":"silly","message":"... target: \"north\"","timestamp":"2016-12-17T14:44:15.915Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":2,\"x\":0,\"y\":1,\"z\":-1}","timestamp":"2016-12-17T14:44:15.915Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.915Z"}
+{"level":"silly","message":"... offset: {\"priority\":2,\"x\":0,\"y\":1,\"z\":-1}","timestamp":"2016-12-17T14:44:15.915Z"}
+{"level":"silly","message":"... start: {\"x\":-3,\"y\":0,\"z\":3}","timestamp":"2016-12-17T14:44:15.915Z"}
+{"level":"silly","message":"... target: \"northEast\"","timestamp":"2016-12-17T14:44:15.915Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":3,\"x\":1,\"y\":0,\"z\":-1}","timestamp":"2016-12-17T14:44:15.915Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.915Z"}
+{"level":"silly","message":"... offset: {\"priority\":3,\"x\":1,\"y\":0,\"z\":-1}","timestamp":"2016-12-17T14:44:15.915Z"}
+{"level":"silly","message":"... start: {\"x\":-3,\"y\":0,\"z\":3}","timestamp":"2016-12-17T14:44:15.915Z"}
+{"level":"silly","message":"... target: \"southEast\"","timestamp":"2016-12-17T14:44:15.915Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":4,\"x\":1,\"y\":-1,\"z\":0}","timestamp":"2016-12-17T14:44:15.916Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.916Z"}
+{"level":"silly","message":"... offset: {\"priority\":4,\"x\":1,\"y\":-1,\"z\":0}","timestamp":"2016-12-17T14:44:15.916Z"}
+{"level":"silly","message":"... start: {\"x\":-3,\"y\":0,\"z\":3}","timestamp":"2016-12-17T14:44:15.916Z"}
+{"level":"silly","message":"... target: \"south\"","timestamp":"2016-12-17T14:44:15.916Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":5,\"x\":0,\"y\":-1,\"z\":1}","timestamp":"2016-12-17T14:44:15.916Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.916Z"}
+{"level":"silly","message":"... offset: {\"priority\":5,\"x\":0,\"y\":-1,\"z\":1}","timestamp":"2016-12-17T14:44:15.916Z"}
+{"level":"silly","message":"... start: {\"x\":-3,\"y\":0,\"z\":3}","timestamp":"2016-12-17T14:44:15.916Z"}
+{"level":"silly","message":"... neighbors: [{\"x\":-4,\"y\":0,\"z\":4},{\"x\":-4,\"y\":1,\"z\":3},{\"x\":-3,\"y\":1,\"z\":2},{\"x\":-2,\"y\":0,\"z\":2},{\"x\":-2,\"y\":-1,\"z\":3},{\"x\":-3,\"y\":-1,\"z\":4}]","timestamp":"2016-12-17T14:44:15.916Z"}
+{"level":"debug","message":"follow","timestamp":"2016-12-17T14:44:15.916Z"}
+{"level":"silly","message":"... direction: 0","timestamp":"2016-12-17T14:44:15.916Z"}
+{"level":"silly","message":"... steps: 1","timestamp":"2016-12-17T14:44:15.916Z"}
+{"level":"silly","message":"... origin: {\"x\":-4,\"y\":0,\"z\":4}","timestamp":"2016-12-17T14:44:15.916Z"}
+{"level":"silly","message":"... path: [{\"x\":-1,\"y\":0,\"z\":1},{\"x\":-2,\"y\":0,\"z\":2},{\"x\":-3,\"y\":0,\"z\":3},{\"x\":-4,\"y\":0,\"z\":4}]","timestamp":"2016-12-17T14:44:15.916Z"}
+{"level":"debug","message":"getNeighborhood","timestamp":"2016-12-17T14:44:15.916Z"}
+{"level":"silly","message":"... origin: {\"x\":-4,\"y\":0,\"z\":4}","timestamp":"2016-12-17T14:44:15.916Z"}
+{"level":"silly","message":"... target: \"southWest\"","timestamp":"2016-12-17T14:44:15.917Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":0,\"x\":-1,\"y\":0,\"z\":1}","timestamp":"2016-12-17T14:44:15.917Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.917Z"}
+{"level":"silly","message":"... offset: {\"priority\":0,\"x\":-1,\"y\":0,\"z\":1}","timestamp":"2016-12-17T14:44:15.917Z"}
+{"level":"silly","message":"... start: {\"x\":-4,\"y\":0,\"z\":4}","timestamp":"2016-12-17T14:44:15.917Z"}
+{"level":"silly","message":"... target: \"northWest\"","timestamp":"2016-12-17T14:44:15.917Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":1,\"x\":-1,\"y\":1,\"z\":0}","timestamp":"2016-12-17T14:44:15.917Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.917Z"}
+{"level":"silly","message":"... offset: {\"priority\":1,\"x\":-1,\"y\":1,\"z\":0}","timestamp":"2016-12-17T14:44:15.917Z"}
+{"level":"silly","message":"... start: {\"x\":-4,\"y\":0,\"z\":4}","timestamp":"2016-12-17T14:44:15.917Z"}
+{"level":"silly","message":"... target: \"north\"","timestamp":"2016-12-17T14:44:15.917Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":2,\"x\":0,\"y\":1,\"z\":-1}","timestamp":"2016-12-17T14:44:15.917Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.917Z"}
+{"level":"silly","message":"... offset: {\"priority\":2,\"x\":0,\"y\":1,\"z\":-1}","timestamp":"2016-12-17T14:44:15.917Z"}
+{"level":"silly","message":"... start: {\"x\":-4,\"y\":0,\"z\":4}","timestamp":"2016-12-17T14:44:15.917Z"}
+{"level":"silly","message":"... target: \"northEast\"","timestamp":"2016-12-17T14:44:15.917Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":3,\"x\":1,\"y\":0,\"z\":-1}","timestamp":"2016-12-17T14:44:15.917Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.917Z"}
+{"level":"silly","message":"... offset: {\"priority\":3,\"x\":1,\"y\":0,\"z\":-1}","timestamp":"2016-12-17T14:44:15.917Z"}
+{"level":"silly","message":"... start: {\"x\":-4,\"y\":0,\"z\":4}","timestamp":"2016-12-17T14:44:15.918Z"}
+{"level":"silly","message":"... target: \"southEast\"","timestamp":"2016-12-17T14:44:15.918Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":4,\"x\":1,\"y\":-1,\"z\":0}","timestamp":"2016-12-17T14:44:15.918Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.918Z"}
+{"level":"silly","message":"... offset: {\"priority\":4,\"x\":1,\"y\":-1,\"z\":0}","timestamp":"2016-12-17T14:44:15.918Z"}
+{"level":"silly","message":"... start: {\"x\":-4,\"y\":0,\"z\":4}","timestamp":"2016-12-17T14:44:15.918Z"}
+{"level":"silly","message":"... target: \"south\"","timestamp":"2016-12-17T14:44:15.918Z"}
+{"level":"silly","message":"... neighbor: {\"priority\":5,\"x\":0,\"y\":-1,\"z\":1}","timestamp":"2016-12-17T14:44:15.918Z"}
+{"level":"debug","message":"walk","timestamp":"2016-12-17T14:44:15.918Z"}
+{"level":"silly","message":"... offset: {\"priority\":5,\"x\":0,\"y\":-1,\"z\":1}","timestamp":"2016-12-17T14:44:15.918Z"}
+{"level":"silly","message":"... start: {\"x\":-4,\"y\":0,\"z\":4}","timestamp":"2016-12-17T14:44:15.918Z"}
+{"level":"silly","message":"... neighbors: [{\"x\":-5,\"y\":0,\"z\":5},{\"x\":-5,\"y\":1,\"z\":4},{\"x\":-4,\"y\":1,\"z\":3},{\"x\":-3,\"y\":0,\"z\":3},{\"x\":-3,\"y\":-1,\"z\":4},{\"x\":-4,\"y\":-1,\"z\":5}]","timestamp":"2016-12-17T14:44:15.918Z"}
