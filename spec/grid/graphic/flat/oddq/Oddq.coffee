@@ -1,4 +1,4 @@
-GridCore = require "../../../GridCore"
+GridCore = require "../../GraphicConfig.coffee"
 # Systeme de coordonnees oddq appliqué.
 class Oddq extends GridCore
   # Est-ce que la cellule se situe sur une colone soumise a un decalage ?
@@ -7,7 +7,7 @@ class Oddq extends GridCore
   # @param oddq.column [int] index de la colonne.
   # @param oddq.row [int] index de la ligne.
   # @return [boolean] vrai si la cellule est sur une colone paire.
-  isShifted: ( oddq )-> isShifted = ( oddq.column % 2 is 0 )
+  isShifted: ( oddq )-> isShifted = ( oddq.column % 2 is 0 ) # FIXME: ??
 
   # Recupere les coordonnees de reference (x et y en pixel)
   # d'une cellule en fonction de sa position en oddq.

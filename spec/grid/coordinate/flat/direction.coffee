@@ -1,5 +1,5 @@
 side = require "./side"
-cursor = require "../../cursor"
+cursor = require "../cursor"
 
 # Liste des directions accessibles depuis une cellule.
 direction =
