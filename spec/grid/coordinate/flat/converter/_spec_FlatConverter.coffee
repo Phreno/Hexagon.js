@@ -1,6 +1,6 @@
-Converter = require "./Converter"
+Converter = require "./FlatConverter"
 
-describe "Converter", ->
+describe "FlatConverter", ->
   converter = new Converter
 
   describe "cubicToOddq", ->

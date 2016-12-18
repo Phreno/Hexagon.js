@@ -1,6 +1,6 @@
-Manager = require "../Manager.coffee"
+FlatManager = require "../flat_manager/FlatManager.coffee"
 # Systeme de coordonnees oddq appliqué.
-class Oddq extends Manager
+class Oddq extends FlatManager
   # Est-ce que la cellule se situe sur une colone soumise a un decalage ?
   #
   # @param oddq [object] coordonnees de la cellule.

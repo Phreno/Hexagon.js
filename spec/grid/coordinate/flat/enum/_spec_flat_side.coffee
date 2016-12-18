@@ -1,5 +1,5 @@
-describe "side", ->
-  side = require "./side"
+describe "flat_side", ->
+  side = require "./flat_side"
   describe "south west", ->
     it "doit etre egal a 0", -> expect( side.SOUTH_WEST ).toBe 0
 

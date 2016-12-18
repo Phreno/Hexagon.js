@@ -27,7 +27,7 @@ class Manager
 
     neighbors = []
     next = @walk
-    directions = require "./direction"
+    directions = require "../enum/flat_direction"
 
     Object
       .keys directions

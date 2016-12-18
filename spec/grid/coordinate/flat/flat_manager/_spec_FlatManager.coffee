@@ -1,11 +1,11 @@
-Manager = require "./Manager.coffee"
+Manager = require "./FlatManager.coffee"
 
-describe "Manager", ->
+describe "FlatManager", ->
   # object a tester
   manager = new Manager
 
   # dépendance
-  directions = require "./direction.coffee"
+  directions = require "../enum/flat_direction"
 
   describe "walk", ->
     it "doit ajouter a la coordonnee l'offset passe en parametre", ->

@@ -1,4 +1,4 @@
-class Converter
+class FlatConverter
   # Converti des coordonnees oddq en coordonnees cubiques.
   # @param oddq [oddq] coordonnees oddq.
   oddqToCubic: ( oddq )->
@@ -17,4 +17,4 @@ class Converter
     row = cubic.z + ( cubic.x - ( cubic.x&1 )) / 2
     oddq = col: col, row: row
 
-module.exports = Converter
+module.exports = FlatConverter
