@@ -55,6 +55,7 @@
   "dependencies": {
     "config": "^1.24.0",
     "pngjs-draw": "0.0.6",
-    "pngjs-image": "^0.11.6"
+    "pngjs-image": "^0.11.6",
+    "winston": "^2.3.0"
   }
 }
