@@ -1,13 +1,6 @@
-GridCore = require "../../GraphicConfig.coffee"
+GraphicConfig = require "../../GraphicConfig.coffee"
 # Systeme de coordonnees oddq appliqué.
-class Oddq extends GridCore
-  # Est-ce que la cellule se situe sur une colone soumise a un decalage ?
-  #
-  # @param oddq [object] coordonnees de la cellule.
-  # @param oddq.column [int] index de la colonne.
-  # @param oddq.row [int] index de la ligne.
-  # @return [boolean] vrai si la cellule est sur une colone paire.
-  isShifted: ( oddq )-> isShifted = ( oddq.column % 2 is 0 ) # FIXME: ??
+class OddqLayout extends GraphicConfig
 
   # Recupere les coordonnees de reference (x et y en pixel)
   # d'une cellule en fonction de sa position en oddq.
@@ -45,7 +38,7 @@ class Oddq extends GridCore
   # @param referencePoint.x [int] coordonnee en abscisse.
   # @param referencePoint.y [int] coordonnee en ordonnee.
   # @return [array] liste des vertices d'un hexagone regroupes deux a deux.
-  getSidesFromReferencePoint: ( referencePoint )->
+  getsidesFromReferencePoint: ( referencePoint )->
     @getVerticesFromReferencePoint( referencePoint )
       .map ( vertex, index, vertices )->
         end = vertices.length - 1
@@ -102,4 +95,4 @@ class Oddq extends GridCore
   #  b3 = ( @sign pt, v3, v1 ) < 0.0
   #  ( b1 is b2 ) and ( b2 is b3 )
 
-module.exports = Oddq
+module.exports = OddqLayout

@@ -10,7 +10,7 @@ DEFAULT_ORIGIN_X  = 0
 DEFAULT_ORIGIN_Y  = 0
 
 # .Noyau du gestionnaire de grille.
-class GridCore
+class GraphicConfig
   # Initialization des parametres.
   #
   # @param opt [object] setup du gestionnaire de grille.
@@ -30,4 +30,4 @@ class GridCore
     @side         = @radius * COEFF_SIDE
     @cellShift    = @height * COEFF_SHIFT
 
-module.export = GridCore
+module.export = GraphicConfig
