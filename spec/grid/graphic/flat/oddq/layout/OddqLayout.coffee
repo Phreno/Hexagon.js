@@ -1,7 +1,21 @@
 GraphicConfig = require "../../../GraphicConfig.coffee"
+winston = require "winston"
+winston.log 'silly', '{OddqLayout}'
 # Systeme de coordonnees oddq appliqué.
-class OddqLayout extends GraphicConfig
-  constructor:()-> # nothing
+class OddqLayout
+  constructor:()->
+    winston.log 'debug', '#OddqLayout#'
+    @graphicConfig = new GraphicConfig()
+
+    # Est-ce que la cellule se situe sur une colone soumise a un decalage ?
+    #
+    # @param oddq [object] coordonnees de la cellule.
+    # @param oddq.column [int] index de la colonne.
+    # @param oddq.row [int] index de la ligne.
+    # @return [boolean] vrai si la cellule est sur une colone paire.
+    @isShifted = ( oddq )->
+      winston.log 'debug', 'OddqLayout.isShifted'
+      isShifted = ( oddq.column % 2 is 0 )
 
   # Recupere les coordonnees de reference (x et y en pixel)
   # d'une cellule en fonction de sa position en oddq.
@@ -10,7 +24,8 @@ class OddqLayout extends GraphicConfig
   # @param oddq.row [int] index de la ligne sur la grille.
   # @param oddq.column [int] index de la colone sur la grille.
   # @return [object] coordonnee du point de reference.
-  getReferencePointFromOddq: ( oddq )->
+  getReferencePointFromCoordinate: ( oddq )->
+    winston.log 'debug', 'OddqLayout.getReferencePointFromCoordinate'
     x = ( oddq.column * @side ) + @originX
     y = ( oddq.row * @height ) + @originY
     referencePoint =
@@ -24,13 +39,32 @@ class OddqLayout extends GraphicConfig
   # @param referencePoint.y [int] coordonnee en ordonnee.
   # @return [object] vertices d'un hexagone recuperes dans l'ordre anti-horaire.
   getVerticesFromReferencePoint: ( referencePoint )->
+    winston.log 'debug', 'OddqLayout.getVerticesFromReferencePoint'
     vertices = [
-        ( x: referencePoint.x + @width - @side, y: referencePoint.y )
-        ( x: referencePoint.x + @side, y: referencePoint.y )
-        ( x: referencePoint.x + @width, y: referencePoint.y + @cellShift )
-        ( x: referencePoint.x + @side, y: referencePoint.y + @height )
-        ( x: referencePoint.x + @width - @side, y: referencePoint.y + @height )
-        ( x: referencePoint.x, y: referencePoint.y + @cellShift )
+      {
+        x: referencePoint.x + @graphicConfig.width - @graphicConfig.side,
+        y: referencePoint.y
+      },
+      {
+        x: referencePoint.x + @graphicConfig.side,
+        y: referencePoint.y
+      },
+      {
+        x: referencePoint.x + @graphicConfig.width,
+        y: referencePoint.y + @graphicConfig.cellShift
+      },
+      {
+        x: referencePoint.x + @graphicConfig.side,
+        y: referencePoint.y + @graphicConfig.height
+      },
+      {
+        x: referencePoint.x + @graphicConfig.width - @graphicConfig.side,
+        y: referencePoint.y + @graphicConfig.height
+      },
+      {
+        x: referencePoint.x,
+        y: referencePoint.y + @graphicConfig.cellShift
+      }
     ]
 
   # Recupere les cotes d'un hexagone a partir de sa coordonnee de reference.
@@ -39,7 +73,8 @@ class OddqLayout extends GraphicConfig
   # @param referencePoint.x [int] coordonnee en abscisse.
   # @param referencePoint.y [int] coordonnee en ordonnee.
   # @return [array] liste des vertices d'un hexagone regroupes deux a deux.
-  getsidesFromReferencePoint: ( referencePoint )->
+  getSidesFromReferencePoint: ( referencePoint )->
+    winston.log 'debug', 'OddqLayout.getSidesFromReferencePoint'
     @getVerticesFromReferencePoint( referencePoint )
       .map ( vertex, index, vertices )->
         end = vertices.length - 1
@@ -49,6 +84,7 @@ class OddqLayout extends GraphicConfig
           end: next
 
   getOddqOverPoint: ( point )->
+    winston.log 'debug', 'OddqLayout.getOddqOverPoint'
     column = Math.floor point.x / @side
     isShifted = ( column % 2 ) is 0
     shifted = point.y / @height

@@ -1,3 +1,6 @@
+winston = require 'winston'
+winston.log 'silly', '{GraphicConfig}'
+
 # Constantes
 COEFF_HEIGHT  = Math.sqrt( 3 )
 COEFF_WIDTH   = 2
@@ -5,6 +8,8 @@ COEFF_SIDE    = 3 / 2
 COEFF_SHIFT   = 1 / 2
 
 # Valeurs par default
+DEFAULT_COLUMNS   = 10
+DEFAULT_ROWS      = 10
 DEFAULT_RADIUS    = 20
 DEFAULT_ORIGIN_X  = 0
 DEFAULT_ORIGIN_Y  = 0
@@ -20,6 +25,7 @@ class GraphicConfig
   # @option opt [int] columns nombre de colonnes de la grille.
   # @option opt [int] rows nombre de ligne de la grille.
   constructor: ( opt )->
+    winston.log 'debug', '#GraphicConfig#'
     @radius       = DEFAULT_RADIUS        if !opt?radius?
     @originX      = DEFAULT_ORIGIN_X      if !opt?originX?
     @originY      = DEFAULT_ORIGIN_Y      if !opt?originY?
@@ -30,4 +36,4 @@ class GraphicConfig
     @side         = @radius * COEFF_SIDE
     @cellShift    = @height * COEFF_SHIFT
 
-module.export = GraphicConfig
+module.exports = GraphicConfig
