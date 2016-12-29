@@ -1,6 +1,7 @@
-GraphicConfig = require "../../GraphicConfig.coffee"
+GraphicConfig = require "../../../GraphicConfig.coffee"
 # Systeme de coordonnees oddq appliqué.
 class OddqLayout extends GraphicConfig
+  constructor:()-> # nothing
 
   # Recupere les coordonnees de reference (x et y en pixel)
   # d'une cellule en fonction de sa position en oddq.

@@ -35,7 +35,7 @@
     },
     "filter": {
       "src": "src/coffee/**/*.coffee",
-      "spec": "spec/**/*.coffee"
+      "spec": "spec/**/*_spec*.coffee"
     },
     "folder": {
       "src": "./src/",
@@ -44,6 +44,7 @@
   },
   "homepage": "https://github.com/Phreno/hexaction#readme",
   "devDependencies": {
+    "canvas": "^1.6.2",
     "del": "^2.2.1",
     "gulp-coffee": "^2.3.2",
     "gulp-coffeeify": "^0.1.8",
@@ -53,6 +54,7 @@
     "gulp-jasmine": "^2.4.0"
   },
   "dependencies": {
+    "canvas": "^1.6.2",
     "config": "^1.24.0",
     "pngjs-draw": "0.0.6",
     "pngjs-image": "^0.11.6",
