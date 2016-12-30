@@ -36,17 +36,35 @@ class HTMLWriter
     #
     # @param coord [oddq] coordonnée sur la grille hexagonale
     # @param layout [layout] disposition de la grille
-    # @param canvas sur lequel la cellule est tracée
+    # @param canvas [canvas] sur lequel la cellule est tracée
     @sketchCellFromCoordinate = (coordinate, layout, canvas)->
       winston.log 'debug', 'HTMLWriter.sketchCellFromCoordinate'
-      winston.log 'silly', "... coordinate: #{coordinate}"
+      winston.log 'silly', "... coordinate: #{JSON.stringify coordinate}"
       referencePoint = layout.getReferencePointFromCoordinate( coordinate )
       @sketchCellFromReferencePoint referencePoint, layout, canvas
+
+    # Trace une grille hexagonale
+    #
+    # @param option [object] configuration de la grille a tracer
+    # @param option.rows [int] nombre de lignes de la grille
+    # @param option.columns [int] nombre de colonnes de la grille
+    # @param layout [layout] disposition de la grille
+    # @param canvas [canvas] canvas sur lequel la grille est tracée.
+    @sketchGrid = (option, layout, canvas)->
+      winston.log 'debug', 'HTMLWriter.sketchGrid'
+      winston.log 'silly', "... option: #{JSON.stringify option}"
+      for rowIndex in [0..option.rows]
+        for columnIndex in [0..option.columns]
+          @sketchCellFromCoordinate {
+            column:columnIndex,
+            row:rowIndex
+          }, layout, canvas
 
   writeToFile:(output)->
     winston.log 'debug', 'HTMLWriter.writeToFile'
     # @sketchCellFromReferencePoint { x:10, y:10 }, @layout, @canvas
-    @sketchCellFromCoordinate { row:2, column:2 }, @layout, @canvas
+    # @sketchCellFromCoordinate { row:2, column:2 }, @layout, @canvas
+    @sketchGrid {rows:5, columns:4}, @layout, @canvas
     dom = @wrapImg @canvas.toDataURL()
     fs = require "fs"
     fs.writeFileSync(output, dom)
