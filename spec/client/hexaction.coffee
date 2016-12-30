@@ -3,6 +3,7 @@
 program = require 'commander'
 program.version 'α.0.1'
 program.option '-x, --export', 'exporte la grille dans le dossier out'
+program.option '-v, --verbose', 'affiche les logs sur la sortie standard'
 program.parse process.argv
 
 winston = require 'winston'
@@ -10,16 +11,19 @@ winston.level = 'silly'
 winston.add winston.transports.File, {
   filename: "#{process.env.HEXACTION_LOG}/client.log"
 }
-# winston.remove winston.transports.Console
 
 # Export de la grille au format png
+
+if !program.verbose
+  winston.remove winston.transports.Console
+
+winston.log 'info', 'LANCEMENT DE LA ROUTINE'
 
 if program.export
   # Attribution des valeurs
   # TODO: placer ces valeur en configuration
-  CANVAS_WIDTH  = 200
-  CANVAS_HEIGHT = 200
-  OUTPUT_FILE   = "out.html"
+  CANVAS_WIDTH  = 1200
+  CANVAS_HEIGHT = 1200
 
   Canvas = require "canvas"
   Writer = require "../grid/graphic/flat/oddq/writer/html/HTMLWriter"
@@ -32,4 +36,6 @@ if program.export
   layout = new Layout
   writer = new Writer layout, canvas
 
-  writer.writeToFile OUTPUT_FILE
+  writer.writeToFile "#{process.env.HEXACTION_OUT}/out.html"
+
+winston.log 'info', 'FIN DE LA ROUTINE'

@@ -9,7 +9,7 @@ class HTMLWriter
     # @param imgData [string] image chiffrée
     @wrapImg = (imgData)->
       winston.log 'debug', 'HTMLWriter.wrapImg'
-      winston.log 'silly', "... imgData: #{JSON.stringify imgData}"
+      # winston.log 'silly', "... imgData: #{JSON.stringify imgData}"
       "<html><body><img src='#{imgData}'/></body></html>"
 
     # Trace un hexagone depuis un point de reference
@@ -39,8 +39,9 @@ class HTMLWriter
     # @param canvas sur lequel la cellule est tracée
     @sketchCellFromCoordinate = (coordinate, layout, canvas)->
       winston.log 'debug', 'HTMLWriter.sketchCellFromCoordinate'
+      winston.log 'silly', "... coordinate: #{coordinate}"
       referencePoint = layout.getReferencePointFromCoordinate( coordinate )
-      @sketchCellFromReferencePoint referencePoint
+      @sketchCellFromReferencePoint referencePoint, layout, canvas
 
   writeToFile:(output)->
     winston.log 'debug', 'HTMLWriter.writeToFile'

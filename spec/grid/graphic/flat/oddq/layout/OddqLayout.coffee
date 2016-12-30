@@ -26,11 +26,12 @@ class OddqLayout
   # @return [object] coordonnee du point de reference.
   getReferencePointFromCoordinate: ( oddq )->
     winston.log 'debug', 'OddqLayout.getReferencePointFromCoordinate'
-    x = ( oddq.column * @side ) + @originX
-    y = ( oddq.row * @height ) + @originY
+    winston.log 'silly', "... oddq: #{JSON.stringify oddq}"
+    x = ( oddq.column * @graphicConfig.side ) + @graphicConfig.originX
+    y = ( oddq.row * @graphicConfig.height ) + @graphicConfig.originY
     referencePoint =
       x: x
-      y: if @isShifted oddq then y else ( y + @cellShift )
+      y: if @isShifted oddq then y else ( y + @graphicConfig.cellShift )
 
   # Recupere les vertices d'un hexagone a partir de sa coordonnee de reference.
   #
