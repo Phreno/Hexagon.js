@@ -4,8 +4,39 @@ winston.log 'silly', '{OddqLayout}'
 # Systeme de coordonnees oddq appliqué.
 class OddqLayout
   constructor:()->
-    winston.log 'debug', '#OddqLayout#'
+    do debug = ->
+      winston.log 'debug', '#OddqLayout#'
+
     @graphicConfig = new GraphicConfig()
+
+    @offset = {
+      southWest: {
+        x: @graphicConfig.cellWidth - @graphicConfig.cellSide,
+        y: 0
+      },
+      southEast: {
+        x: @graphicConfig.cellSide,
+        y: 0
+      },
+      east: {
+        x: @graphicConfig.cellWidth,
+        y: @graphicConfig.cellShift
+      },
+      northEast: {
+        x: @graphicConfig.cellSide,
+        y: @graphicConfig.cellHeight
+      },
+      northWest: {
+        x: @graphicConfig.cellWidth - @graphicConfig.cellSide,
+        y: @graphicConfig.cellHeight
+      },
+      west: {
+        x: 0,
+        y: @graphicConfig.cellShift
+      }
+    }
+
+    winston.log 'silly', "... @offset: #{JSON.stringify @offset}"
 
     # Est-ce que la cellule se situe sur une colone soumise a un decalage ?
     #
@@ -17,56 +48,87 @@ class OddqLayout
       winston.log 'debug', 'OddqLayout.isShifted'
       isShifted = ( oddq.column % 2 is 0 )
 
-  # Recupere les coordonnees de reference (x et y en pixel)
-  # d'une cellule en fonction de sa position en oddq.
-  #
-  # @param oddq [object] position en oddq.
-  # @param oddq.row [int] index de la ligne sur la grille.
-  # @param oddq.column [int] index de la colone sur la grille.
-  # @return [object] coordonnee du point de reference.
-  getReferencePointFromCoordinate: ( oddq )->
-    winston.log 'debug', 'OddqLayout.getReferencePointFromCoordinate'
-    winston.log 'silly', "... oddq: #{JSON.stringify oddq}"
-    x = ( oddq.column * @graphicConfig.side ) + @graphicConfig.originX
-    y = ( oddq.row * @graphicConfig.height ) + @graphicConfig.originY
-    referencePoint =
-      x: x
-      y: if @isShifted oddq then y else ( y + @graphicConfig.cellShift )
+    # Recupere les coordonnees de reference (x et y en pixel)
+    # d'une cellule en fonction de sa position en oddq.
+    #
+    # @param oddq [object] position en oddq.
+    # @param oddq.row [int] index de la ligne sur la grille.
+    # @param oddq.column [int] index de la colone sur la grille.
+    # @return [object] coordonnee du point de reference.
+    @getReferencePointFromCoordinate = ( oddq ) ->
+      do debug = ->
+        winston.log 'debug', 'OddqLayout.getReferencePointFromCoordinate'
+        winston.log 'silly', "... oddq: #{JSON.stringify oddq}"
 
-  # Recupere les vertices d'un hexagone a partir de sa coordonnee de reference.
-  #
-  # @param referencePoint [object] coordonnees de reference d'un hexagone.
-  # @param referencePoint.x [int] coordonnee en abscisse.
-  # @param referencePoint.y [int] coordonnee en ordonnee.
-  # @return [object] vertices d'un hexagone recuperes dans l'ordre anti-horaire.
-  getVerticesFromReferencePoint: ( referencePoint )->
-    winston.log 'debug', 'OddqLayout.getVerticesFromReferencePoint'
-    vertices = [
-      {
-        x: referencePoint.x + @graphicConfig.width - @graphicConfig.side,
-        y: referencePoint.y
-      },
-      {
-        x: referencePoint.x + @graphicConfig.side,
-        y: referencePoint.y
-      },
-      {
-        x: referencePoint.x + @graphicConfig.width,
-        y: referencePoint.y + @graphicConfig.cellShift
-      },
-      {
-        x: referencePoint.x + @graphicConfig.side,
-        y: referencePoint.y + @graphicConfig.height
-      },
-      {
-        x: referencePoint.x + @graphicConfig.width - @graphicConfig.side,
-        y: referencePoint.y + @graphicConfig.height
-      },
-      {
-        x: referencePoint.x,
-        y: referencePoint.y + @graphicConfig.cellShift
-      }
-    ]
+      do error = ->
+        if !oddq?
+          throw new Error 'oddq is not provided'
+          exit 1
+        if !oddq.column?
+          throw new Error 'oddq.column is not provided'
+          exit 1
+        if !oddq.row?
+          throw new Error 'oddq.row is not provided'
+          exit 1
+
+      x = ( oddq.column * @graphicConfig.cellSide ) + @graphicConfig.originX
+      y = ( oddq.row * @graphicConfig.cellHeight ) + @graphicConfig.originY
+      referencePoint =
+        x: x
+        y: if @isShifted oddq then y else ( y + @graphicConfig.cellShift )
+
+    # Recupere les vertices d'un hexagone a partir de sa coordonnee de
+    # reference.
+    #
+    # @param referencePoint [object] coordonnees de reference d'un hexagone.
+    # @param referencePoint.x [int] coordonnee en abscisse.
+    # @param referencePoint.y [int] coordonnee en ordonnee.
+    # @return [object] vertices d'un hexagone recuperes dans l'ordre
+    # anti-horaire.
+    @getVerticesFromReferencePoint = ( referencePoint )->
+      do debug = ->
+        winston.log 'debug', 'OddqLayout.getVerticesFromReferencePoint'
+        winston.log 'silly', "... referencePoint: #{referencePoint}"
+
+      do error = ->
+        if !referencePoint?
+          throw new Error 'referencePoint is not provided'
+          exit 1
+
+        if !referencePoint.x?
+          throw new Error 'referencePoint.x is not provided'
+          exit 1
+
+        if !referencePoint.y?
+          throw new Error 'referencePoint.y is not provided'
+          exit 1
+
+      vertices = [
+        {
+          x: referencePoint.x + @offset.southWest.x,
+          y: referencePoint.y + @offset.southWest.y
+        },
+        {
+          x: referencePoint.x + @offset.southEast.x,
+          y: referencePoint.y + @offset.southEast.y
+        },
+        {
+          x: referencePoint.x + @offset.east.x,
+          y: referencePoint.y + @offset.east.y
+        },
+        {
+          x: referencePoint.x + @offset.northEast.x,
+          y: referencePoint.y + @offset.northEast.y
+        },
+        {
+          x: referencePoint.x + @offset.northWest.x,
+          y: referencePoint.y + @offset.northWest.y
+        },
+        {
+          x: referencePoint.x + @offset.west.x,
+          y: referencePoint.y + @offset.west.y
+        }
+      ]
 
   # Recupere les cotes d'un hexagone a partir de sa coordonnee de reference.
   #
