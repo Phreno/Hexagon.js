@@ -87,8 +87,9 @@ class OddqLayout
     # anti-horaire.
     @getVerticesFromReferencePoint = ( referencePoint )->
       do debug = ->
+        ref = JSON.stringify referencePoint
         winston.log 'debug', 'OddqLayout.getVerticesFromReferencePoint'
-        winston.log 'silly', "... referencePoint: #{referencePoint}"
+        winston.log 'silly',"... referencePoint: #{ref}"
 
       do error = ->
         if !referencePoint?
