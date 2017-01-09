@@ -22,9 +22,10 @@ option = {
   columns: 10
 }
 
+Writer = require "../grid/graphic/flat/oddq/writer/html/HTMLWriter"
+writer = new Writer
+
 do sketchCanvas = ->
-  Writer = require "../grid/graphic/flat/oddq/writer/html/HTMLWriter"
-  writer = new Writer
   writer.sketchGrid option
 
 do exportToHtmlFile = ->
