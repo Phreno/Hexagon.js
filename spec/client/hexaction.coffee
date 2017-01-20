@@ -29,6 +29,8 @@ do sketchCanvas = ->
   writer.sketchGrid option
 
 do exportToHtmlFile = ->
-  writer.writeToFile "#{process.env.HEXACTION_OUT}/out.html"
+  file = "#{process.env.HEXACTION_OUT}/out.html"
+  winston.log 'info', "export processing to #{file}"
+  writer.writeToFile file
 
 winston.log 'info', 'FIN DE LA ROUTINE'
