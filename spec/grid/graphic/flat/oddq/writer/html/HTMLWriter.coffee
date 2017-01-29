@@ -1,27 +1,41 @@
-winston = require 'winston'
-winston.log 'silly', '{HTMLWriter}'
+# [K3rn€l_P4n1k] HTMLWriter
+#   Le propos de cette classe est de dessiner une grille hexagonale.
 
-class HTMLWriter
-  constructor: (@layout)->
-    winston.log 'debug', '#HTMLWriter#'
+#################
+# CONFIGURATION #
+#################
 
-    @DEFAULT= {}
-    @DEFAULT.ROWS = 10
-    @DEFAULT.COLUMNS = 10
-    @DEFAULT.OUTPUT = './out.html'
-    @DEFAULT.Layout = require '../../layout/OddqLayout'
-    @DEFAULT.NO_IMG =
-      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAA'+
-      'ABmJLR0QA/wD/AP+gvaeTAAAAsUlEQVR4nO3BAQEAAACCIP+vbkhAAQAAAAAAAAAAAAAA'+
+DEFAULT =
+  output: 'unprovided.html'
+  no_img:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAA'+
+      'AABmJLR0QA/wD/AP+gvaeTAAAAsUlEQVR4nO3BAQEAAACCIP+vbkhAAQAAAAAAAAAAAAAA'+
       'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'+
       'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'+
       'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB8GXHmAAFMgHIEAAA'+
       'AAElFTkSuQmCC'
 
+
+DEPENDENCY =
+  OddqLayout: require '../../layout/OddqLayout'
+
+VENDOR =
+  winston: require 'winston'
+  Canvas: require 'canvas'
+
+VENDOR.winston.log 'silly', (JSON.stringify DEPENDENCY, null, 2)
+##############
+# HTMLWriter #
+##############
+VENDOR.winston.log 'silly', '{HTMLWriter}'
+
+class HTMLWriter
+  constructor: (@layout)->
+    VENDOR.winston.log 'debug', '#HTMLWriter#'
+
     if !@layout?
-      winston.log 'debug', 'layout is not provided'
-      winston.log 'debug', '--> setting default layout: oddq'
-      @layout = new @DEFAULT.Layout
+      VENDOR.winston.log 'debug', 'layout is not provided'
+      VENDOR.winston.log 'debug', '--> setting default layout: oddq'
+      @layout = new DEPENDENCY.OddqLayout
 
     ###########
     # PRIVATE #
@@ -32,14 +46,14 @@ class HTMLWriter
     # @param imgData [string] image chiffrée
     wrapImg = (imgData)->
       do debug = ->
-        winston.log 'debug', 'HTMLWriter.wrapImg'
-        # winston.log 'silly', "... imgData: #{JSON.stringify imgData}"
+        VENDOR.winston.log 'debug', 'HTMLWriter.wrapImg'
+        # VENDOR.winston.log 'silly', "... imgData: #{JSON.stringify imgData}"
 
       do checkArgsOrDefault = ->
         if !imgData?
-          winston.log 'debug', 'imgData is not provided'
-          winston.log 'debug', '--> setting default no img sample'
-          imgData = @DEFAULT.NO_IMG
+          VENDOR.winston.log 'debug', 'imgData is not provided'
+          VENDOR.winston.log 'debug', '--> setting default no img sample'
+          imgData = DEFAULT.no_img
 
       do execute = ->
         "<html><body><img src='#{imgData}'/></body></html>"
@@ -52,9 +66,9 @@ class HTMLWriter
     # @param canvas [canvas] canvas sur lequel la cellule est tracée
     sketchCellFromReferencePoint = (referencePoint, layout, canvas)->
       do debug = ->
-        winston.log 'debug', 'HTMLWriter.sketchCellFromReferencePoint'
+        VENDOR.winston.log 'debug', 'HTMLWriter.sketchCellFromReferencePoint'
         point = JSON.stringify referencePoint
-        winston.log 'silly',"... referencePoint: #{point}"
+        VENDOR.winston.log 'silly',"... referencePoint: #{point}"
 
       do error = ->
         if !referencePoint?
@@ -79,7 +93,7 @@ class HTMLWriter
         canvasContext = canvas.getContext '2d'
         canvasContext.beginPath()
         for vertice in path
-          winston.log 'silly', "..: vertice: #{JSON.stringify vertice}"
+          VENDOR.winston.log 'silly', "..: vertice: #{JSON.stringify vertice}"
           canvasContext.lineTo vertice.x, vertice.y
         canvasContext.stroke()
 
@@ -90,12 +104,15 @@ class HTMLWriter
     # @param canvas [canvas] sur lequel la cellule est tracée
     sketchCellFromCoordinate = (coordinate, layout, canvas)->
       do debug = ->
-        winston.log 'debug', 'HTMLWriter.sketchCellFromCoordinate'
-        winston.log 'silly', "... coordinate: #{JSON.stringify coordinate}"
+        VENDOR.winston.log 'debug', 'HTMLWriter.sketchCellFromCoordinate'
+        VENDOR.winston.log(
+          'silly'
+          , "... coordinate: #{JSON.stringify coordinate}")
 
       do error = ->
         throw new Error 'ERR coordinate is not provided' if !coordinate?
         throw new Error 'ERR layout is not provided' if !layout?
+
       referencePoint = layout.getReferencePointFromCoordinate( coordinate )
       sketchCellFromReferencePoint referencePoint, layout, canvas
 
@@ -104,63 +121,40 @@ class HTMLWriter
     ##########
 
     # Trace une grille hexagonale
-    #
-    # @param option [object] configuration de la grille a tracer
-    # @param option.rows [int] nombre de lignes de la grille
-    # @param option.columns [int] nombre de colonnes de la grille
-    # @param layout [layout] disposition de la grille
-    @sketchGrid = ( option, layout = @layout )->
-      winston.log 'debug', 'HTMLWriter.sketchGrid'
-
-      do checkArgsOrDefault = ->
-        if !option?
-          winston.log 'debug', 'option is not provided'
-          winston.log 'debug', '--> setting default values'
-          option = {
-            rows: @DEFAULT.ROWS,
-            columns: @DEFAULT.COLUMNS
-          }
-
-        if !option.rows?
-          winston.log 'debug', 'option.rows is not provided'
-          winston.log 'debug', '--> setting default number of rows'
-          option.rows = @DEFAULT.ROWS
-
-        if !option.columns?
-          winston.log 'debug', 'option.columns is not provided'
-          winston.log 'debug', '--> setting default number of columns'
-          option.columns = @DEFAULT.COLUMNS
-
-        winston.log 'silly', "... option: #{JSON.stringify option}"
+    @sketchGrid = (layout = @layout)->
+      VENDOR.winston.log 'debug', 'HTMLWriter.sketchGrid'
 
       do error = ->
         if !layout?
           throw new Error 'ERR layout is not provided'
           process.exit 1
 
+      @canvas = do init = () ->
+        VENDOR.winston.log 'silly', '""""""'
+        VENDOR.winston.log 'silly', (JSON.stringify layout, null, 2 )
+        VENDOR.winston.log 'silly', '......'
+        canvasWidth =
+          layout.graphicConfig.columns * layout.graphicConfig.cellWidth
+        canvasHeight =
+          layout.graphicConfig.rows * layout.graphicConfig.cellHeight
+        new VENDOR.Canvas canvasWidth, canvasHeight
 
-      @canvas = do init = ->
-        Canvas = require 'canvas'
-        canvasWidth = option.columns * layout.graphicConfig.cellWidth
-        canvasHeight = option.rows * layout.graphicConfig.cellHeight
-        new Canvas canvasWidth, canvasHeight
-
-      do execute = (canvas = @canvas)->
-        for rowIndex in [0..option.rows]
-          for columnIndex in [0..option.columns]
+      do execute = (container = @canvas)->
+        for rowIndex in [0..layout.graphicConfig.rows]
+          for columnIndex in [0..layout.graphicConfig.columns]
             sketchCellFromCoordinate {
               column:columnIndex,
               row:rowIndex
-            }, layout, canvas
+            }, layout, container
 
     @writeToFile = (output) ->
-      do checkArgsOrDefault = ->
+      do error = ->
         if !output?
-          winston.log 'debug', 'output is not provided'
-          winston.log 'debug', "--> setting default: #{@DEFAULT.OUTPUT}"
-          output = @DEFAULT.OUTPUT
-      do execute = ( canvas = @canvas ) ->
-        winston.log 'debug', 'HTMLWriter.writeToFile'
-        ( require 'fs' ).writeFileSync( output, wrapImg canvas.toDataURL() )
+          throw new Error 'ERR output is not provided'
+          process.exit 1
+
+      do execute = ( grid = @canvas ) ->
+        VENDOR.winston.log 'debug', 'HTMLWriter.writeToFile'
+        ( require 'fs' ).writeFileSync( output, wrapImg grid.toDataURL() )
 
 module.exports = HTMLWriter

@@ -4,21 +4,23 @@
 #   Client console pour travailler avec des grilles hexagonales
 #
 # Requirements:
-# - CoffeeScript
-# - Nodejs
+# - HTMLWriter
 
 DEFAULT =
   rows:10
   cols:10
+  radius:50
   outputFolder: "./"
   outputFile: "out.html"
   logFolder: "./"
   logFile: "client.log"
   verbosity: "silly"
-  verbose: "true"
+  disposition: "oddq"
 
 DEPENDENCY =
-  HTMLWriter: "../grid/graphic/flat/oddq/writer/html/HTMLWriter"
+  HTMLWriter: require "../grid/graphic/flat/oddq/writer/html/HTMLWriter"
+  OddqLayout: require "../grid/graphic/flat/oddq/layout/OddqLayout"
+  Layout: undefined
 
 VENDOR =
   program: require 'commander' # Parse les arguments du script
@@ -26,6 +28,10 @@ VENDOR =
 
 do init = ->
   VENDOR.program.version 'α.0.1'
+
+  coercion =
+    getLayout: (layoutName = DEFAULT.disposition) ->
+      DEPENDENCY.Layout = DEPENDENCY.OddqLayout
 
   VENDOR.program.option(
     '-r, --rows [number]'
@@ -36,6 +42,17 @@ do init = ->
     '-c, --columns [number]'
     , "(#{DEFAULT.cols}) Nombre de colonnes de la grilles"
     , DEFAULT.cols)
+
+  VENDOR.program.option(
+    '-d, --disposition [string]'
+    , "(#{DEFAULT.disposition}) Disposition de la grille "
+    + "(oddq, oddr, evenq, evenr)"
+    , coercion.getLayout)
+
+  VENDOR.program.option(
+    '-r, --radius [number]'
+    , "(#{DEFAULT.radius}) Distance vertex-centre"
+    , DEFAULT.radius)
 
   VENDOR.program.option(
     '-lf, --logFile [string]'
@@ -81,9 +98,10 @@ do displayLog = ->
     VENDOR.winston.remove VENDOR.winston.transports.Console
 
 do processing = ->
-  Writer = require DEPENDENCY.HTMLWriter
-  writer = new Writer
-  writer.sketchGrid VENDOR.program
+  layout = new DEPENDENCY.Layout VENDOR.program
+
+  writer = new DEPENDENCY.HTMLWriter layout
+  writer.sketchGrid
 
   file = "#{VENDOR.program.outputFolder}/#{VENDOR.program.outputFile}"
   VENDOR.winston.log 'info', "export processing to #{file}"
