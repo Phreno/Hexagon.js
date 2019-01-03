@@ -101,7 +101,8 @@ export default {
         x: undefined,
         y: undefined
       }
-    }
+    },
+    actions: []
   }),
   mounted(){
     this.trackMouse()
@@ -132,19 +133,13 @@ export default {
     },
   },
   methods: {
-    // Debug functions
     trackMouse(){
-      this
-        .getCanvas()
-        .addEventListener('mousemove', this.onMouseMove)
+      this.getCanvas().addEventListener('mousemove', this.onMouseMove)
+      this.getCanvas().addEventListener('click', this.onMouseClick)
     },
-    
-    // Grid functions
     draw(){
       this.getGridManager().draw(this.settings)
     },
-
-    // Getters & Setters 
     getCanvas(){
       return document.getElementById(this.canvas.ID)
     },
@@ -157,30 +152,35 @@ export default {
     getGridManager(){
       return this.gridManager
     },
+    onMouseClick(event){
+      console.log("click :)")
+      let pixel=this.sanitizeMousePosition(event)
+      let hex=this.getGridManager().getHexUnderPixel(pixel)
+      hex.index=2
+      this.getGridManager().drawHex(hex)
+      console.log(hex)
+    },
     onMouseMove(event){
       this.setMousePosition(event)
       this.setHexUnderMousePosition()
     },
     setMousePosition(event){
-      let rect=this.getBoundingClientRect()
-      this.mouse.position.x=event.clientX-rect.left
-      this.mouse.position.y=event.clientY-rect.top  
+      this.mouse.position=this.sanitizeMousePosition(event)
     },
     setHexUnderMousePosition(){
-      let hex=this
+      this.mouse.coordinate.cube=this
         .getGridManager()
-        .getHexUnderPixel(
-          this.mouse.position
-        )
-      this.mouse.coordinate.cube.q=Math.trunc(hex.q)
-      this.mouse.coordinate.cube.r=Math.trunc(hex.r)
-      this.mouse.coordinate.cube.s=Math.trunc(hex.s)
+        .getHexUnderPixel(this.mouse.position)
+    },
+    sanitizeMousePosition(event){
+      let rect=this.getBoundingClientRect()
+      return {
+        x:event.clientX-rect.left,
+        y:event.clientY-rect.top  
+      }
     }
-
   }
 } 
 </script>
 
-<style scoped>
-  
-</style>
+<style scoped></style>

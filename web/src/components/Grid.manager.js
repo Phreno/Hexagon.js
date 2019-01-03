@@ -62,11 +62,19 @@ export default function(canvas, settings){
     return GridCore.Hex(col, row, rest)
   }
   function getHexUnderPixel(pixel){
-    return GridCore.pixel_to_hex(getGridLayout(), pixel)
+    return sanitizeHex(GridCore.pixel_to_hex(getGridLayout(), pixel))
+  }
+  function sanitizeHex(hex){
+    return {
+      q:Math.trunc(hex.q),
+      r:Math.trunc(hex.r),
+      s:Math.trunc(hex.s)
+    }
   }
 
   return {
     draw,
+    drawHex,
     getHexUnderPixel
   }
 }
