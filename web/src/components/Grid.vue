@@ -28,27 +28,27 @@
           </v-card-actions>
 
           <v-card-actions>
-            <v-flex xs12 sm6 md3 v-if="mousePosition">
+            <v-flex xs12 sm6 md3 v-if="displayableMousePosition">
               <v-text-field
                 label="mouse"
-                :value="mousePosition"
+                :value="displayableMousePosition"
                   outline
               ></v-text-field>
             </v-flex> 
-            <v-flex xs12 sm6 md3 v-if="hexPosition">
+            <v-flex xs12 sm6 md3 v-if="displayableHexCoordinate">
               <v-text-field
                 label="hexagon"
-                :value="hexPosition"
+                :value="displayableHexCoordinate"
                   outline
               ></v-text-field>
             </v-flex>   
           </v-card-actions>
           
           <v-card-actions>
-            <v-flex xs12 sm6 md3 v-if="lastActionReport">
+            <v-flex xs12 sm6 md3 v-if="displayableLastActionReport">
               <v-text-field
                 label="last action"
-                :value="lastActionReport"
+                :value="displayableLastActionReport"
                   outline
               ></v-text-field>
             </v-flex> 
@@ -122,26 +122,20 @@ export default {
       height: 200,
     },
     mouse:{
-      coordinate: {
-        cube: {
-          q: 0,
-          r: 0,
-          s: 0
-        } 
-      },
-      position:{
-        x: 0,
-        y: 0
-      }
+      moveEvent:new MouseEvent("move", {
+        bubbles: true,
+        cancelable: true,
+        view: window
+      })
     },
     actions: []
   }),
   mounted(){
-    this.setCanvas()
-    this.setGridManager()
-    this.setGridInfo(this.gridManager)
+    this.canvas.container=document.getElementById(this.canvas.ID)
+    this.gridManager=GridManager(this.canvas.container, this.settings)
+    this.gridInfo=GridInfo(this.gridManager)
     this.trackMouse()
-    // setInterval(this.loop,this.frameInterval)
+    // setInterval(this.loop,this.loopIntervalDuration)
   },
   watch:{
     "settings.cellsPerCol"(){
@@ -152,30 +146,52 @@ export default {
     }
   },
   computed: {
-    mousePosition(){
+    hexUnderMouse(){
+      var hex=undefined
+      if (
+        this.pixelUnderMouse
+        && this.gridManager
+      ){
+        hex=this
+          .gridManager
+          .getHexUnderPixel(this.pixelUnderMouse)
+        hex.color='blue'
+        this.gridManager.drawHex(hex)
+      }
+      return hex
+    },
+    displayableMousePosition(){
       return (
         this.gridInfo 
-        && undefined!==this.mouse.position.x 
-        && undefined!==this.mouse.position.y
-      ) ? this.gridInfo.getPixelCoordinate(this.mouse.position)
+        && this.pixelUnderMouse
+        && undefined!==this.pixelUnderMouse.x 
+        && undefined!==this.pixelUnderMouse.y
+      ) ? this.gridInfo.getPixelCoordinate(this.pixelUnderMouse)
         : undefined
     },
-    hexPosition(){
+    displayableHexCoordinate(){
       return (
         this.gridInfo
-        && undefined!==this.mouse.coordinate.cube.q
-        && undefined!==this.mouse.coordinate.cube.r
-        && undefined!==this.mouse.coordinate.cube.s
-      ) ? this.gridInfo.getHexCoordinate(this.mouse.coordinate.cube)
+        && this.hexUnderMouse
+      ) ? this.gridInfo.getHexCoordinate(this.hexUnderMouse)
         : undefined
     },
-    lastActionReport(){
+    displayableLastActionReport(){
       return (
         this.gridInfo
         && this.lastAction
       )
         ? this.gridInfo.getEventReport(this.lastAction)
         : undefined
+    },
+    pixelUnderMouse(){
+      return (
+        this.gridManager
+        && this.mouse
+        && this.mouse.moveEvent
+      )
+        ? this.gridManager.getPixelFromEvent(this.mouse.moveEvent)
+        : undefined
     },
     lastAction(){
       return (
@@ -188,7 +204,7 @@ export default {
     hexActions(){
       return this.actions
     },
-    frameInterval(){
+    loopIntervalDuration(){
       return (
         this.settings
         && this.settings.framePerSecond
@@ -199,7 +215,7 @@ export default {
   },
   methods: {
     startLoop(){
-      this.loopInterval=setInterval(this.loop, this.frameInterval)
+      this.loopInterval=setInterval(this.loop, this.loopIntervalDuration)
     },
     endLoop(){
       clearInterval(this.loopInterval)
@@ -215,8 +231,6 @@ export default {
       ){
         this.canvas.container.addEventListener('mousemove', this.onMouseMove)
         this.canvas.container.addEventListener('click', this.onMouseClick)
-      } else {
-        console.error("err: lors de la récupération de la zone de dessin")
       }
     },
     trackAction(event){
@@ -236,32 +250,13 @@ export default {
     highlightHex(hex){
       hex.index=2
     },
-    setGridManager(){
-      this.gridManager=GridManager(this.canvas.container, this.settings)
-    },
     onMouseClick(event){
-      console.log(event)
       this.trackAction(event)
       this.draw()
     },
     onMouseMove(event){
-      this.setMousePosition(event)
-      this.setHexUnderMousePosition()
+      this.mouse.moveEvent=event
     },
-    setCanvas(){
-      this.canvas.container=document.getElementById(this.canvas.ID)
-    },
-    setMousePosition(event){
-      this.mouse.position=this.gridManager.getPixelFromEvent(event)
-    },
-    setHexUnderMousePosition(){
-      this.mouse.coordinate.cube=this
-        .gridManager
-        .getHexUnderPixel(this.mouse.position)
-    },
-    setGridInfo(){
-      this.gridInfo=GridInfo(this.gridManager)
-    }
   }
 } 
 </script>

@@ -139,6 +139,7 @@ function drawGrid(id, backgroundColor, withLabels, layout, hexes) {
     });
 }
 
+/*
 drawGrid("layout-test-orientation-pointy", "hsl(60, 10%, 90%)", true,
          new Layout(Layout.pointy, new Point(25, 25), new Point(0, 0)));
 drawGrid("layout-test-orientation-flat", "hsl(60, 10%, 85%)", true,
@@ -239,3 +240,4 @@ drawGrid("shape-flat-rectangle-sr", "hsl(60, 10%, 90%)", false,
 drawGrid("shape-flat-rectangle-qs", "hsl(60, 10%, 85%)", false,
          new Layout(Layout.flat, new Point(10, 10), new Point(0, 0)),
          shapeRectangle(8, 6, permuteQSR));
+*/
