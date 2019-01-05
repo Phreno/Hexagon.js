@@ -2,7 +2,10 @@ import * as GridCore from "./Grid.core"
 
 export default function(canvas, settings){
   function draw(opts){
-    settings=opts
+    settings={
+      ...settings,
+      ...opts
+    }
     clearCanvas()
     drawGrid()
   }
@@ -30,10 +33,12 @@ export default function(canvas, settings){
         : getCanvasContext2D().moveTo(corner.x, corner.y)
     })
     getCanvasContext2D().lineTo(corners[0].x, corners[0].y)
+    getCanvasContext2D().fillStyle=hex.color?hex.color:'red'
+    getCanvasContext2D().strokeStyle=hex.color?hex.color:'gray'
+    isPrime(hex.index)
+      ? getCanvasContext2D().fill()
+      : getCanvasContext2D().stroke()
 
-    isPrime(hex.index)?
-      getCanvasContext2D().fill()
-      :getCanvasContext2D().stroke()
   }
   function getHexCorners(hex){
     return GridCore
@@ -71,10 +76,28 @@ export default function(canvas, settings){
       s:Math.trunc(hex.s)
     }
   }
+  function getHexFromEvent(event){
+    return (
+      event.layerX
+      && event.layerY
+    )
+      ? getHexUnderPixel(getPixelFromEvent(event))
+      : undefined
+  }
+  function getPixelFromEvent(event){
+    return (
+      event.layerX
+      && event.layerY
+    )
+      ? { x:event.layerX,y:event.layerY }
+      : undefined
+  }
 
   return {
     draw,
     drawHex,
-    getHexUnderPixel
+    getHexUnderPixel,
+    getPixelFromEvent,
+    getHexFromEvent
   }
 }

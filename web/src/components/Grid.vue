@@ -11,23 +11,50 @@
               <div class="headline" v-text="title"></div>
             </div>
           </v-card-title>
-  
+
           <v-card-actions>
-            <v-flex xs12 sm6 md3>
+            <v-btn 
+              color="success" 
+              v-if="!loopInterval"
+              @click="startLoop">
+            start loop
+            </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn color="error" 
+              v-if="loopInterval"
+              @click="endLoop">
+              end loop
+            </v-btn>
+          </v-card-actions>
+
+          <v-card-actions>
+            <v-flex xs12 sm6 md3 v-if="mousePosition">
               <v-text-field
                 label="mouse"
                 :value="mousePosition"
                   outline
               ></v-text-field>
             </v-flex> 
-            <v-flex xs12 sm6 md3
-                v-if="mouse.coordinate && mouse.coordinate.cube">
+            <v-flex xs12 sm6 md3 v-if="hexPosition">
               <v-text-field
                 label="hexagon"
                 :value="hexPosition"
                   outline
               ></v-text-field>
+            </v-flex>   
+          </v-card-actions>
+          
+          <v-card-actions>
+            <v-flex xs12 sm6 md3 v-if="lastActionReport">
+              <v-text-field
+                label="last action"
+                :value="lastActionReport"
+                  outline
+              ></v-text-field>
             </v-flex> 
+          </v-card-actions>
+
+          <v-card-actions>
             <v-spacer></v-spacer>
             <v-tooltip left>
               <v-btn slot="activator" icon @click="showSettings = !showSettings">
@@ -66,6 +93,7 @@
 
 <script>
 import GridManager from "./Grid.manager"
+import GridInfo from "./Grid.info"
 import {
   layout_pointy,
   layout_flat
@@ -73,41 +101,47 @@ import {
 export default {
   data: ()=>({
     gridManager: undefined,
+    gridInfo: undefined,
     showSettings: false,
     title: "hexaction",
+    loopInterval: undefined,
     settings: {
+      framePerSecond: 25,
       layoutOrientation: layout_flat,
-      maxCellsPerRow: 100,
+      maxCellsPerRow: 30,
       minCellsPerRow: 1,
-      maxCellsPerCol: 100,
+      maxCellsPerCol: 30,
       minCellsPerCol: 1,
-      cellsPerRow: 25,
+      cellsPerRow: 10,
       cellsPerCol: 10
     },
     canvas:{
+      container: undefined,
       ID:"grid-drawer",
-      width: 500,
-      height: 500,
+      width: 200,
+      height: 200,
     },
     mouse:{
       coordinate: {
         cube: {
-          q: undefined,
-          r: undefined,
-          s: undefined
+          q: 0,
+          r: 0,
+          s: 0
         } 
       },
       position:{
-        x: undefined,
-        y: undefined
+        x: 0,
+        y: 0
       }
     },
     actions: []
   }),
   mounted(){
-    this.trackMouse()
+    this.setCanvas()
     this.setGridManager()
-    this.draw()
+    this.setGridInfo(this.gridManager)
+    this.trackMouse()
+    // setInterval(this.loop,this.frameInterval)
   },
   watch:{
     "settings.cellsPerCol"(){
@@ -119,65 +153,114 @@ export default {
   },
   computed: {
     mousePosition(){
-      return [
-        this.mouse.position.x,
-        this.mouse.position.y
-      ].join(':')
+      return (
+        this.gridInfo 
+        && undefined!==this.mouse.position.x 
+        && undefined!==this.mouse.position.y
+      ) ? this.gridInfo.getPixelCoordinate(this.mouse.position)
+        : undefined
     },
     hexPosition(){
-      return [
-        this.mouse.coordinate.cube.q,
-        this.mouse.coordinate.cube.r,
-        this.mouse.coordinate.cube.s
-      ].join(':')
+      return (
+        this.gridInfo
+        && undefined!==this.mouse.coordinate.cube.q
+        && undefined!==this.mouse.coordinate.cube.r
+        && undefined!==this.mouse.coordinate.cube.s
+      ) ? this.gridInfo.getHexCoordinate(this.mouse.coordinate.cube)
+        : undefined
     },
+    lastActionReport(){
+      return (
+        this.gridInfo
+        && this.lastAction
+      )
+        ? this.gridInfo.getEventReport(this.lastAction)
+        : undefined
+    },
+    lastAction(){
+      return (
+        this.actions
+        && this.actions[this.actions.length-1]
+      )
+        ? this.actions[this.actions.length-1]
+        : undefined
+    },
+    hexActions(){
+      return this.actions
+    },
+    frameInterval(){
+      return (
+        this.settings
+        && this.settings.framePerSecond
+      )
+        ? 1000/this.settings.framePerSecond
+        : undefined
+    }
   },
   methods: {
+    startLoop(){
+      this.loopInterval=setInterval(this.loop, this.frameInterval)
+    },
+    endLoop(){
+      clearInterval(this.loopInterval)
+      this.loopInterval=undefined
+    },
+    loop(){
+      this.draw()
+    },
     trackMouse(){
-      this.getCanvas().addEventListener('mousemove', this.onMouseMove)
-      this.getCanvas().addEventListener('click', this.onMouseClick)
+      if(
+        this.canvas
+        && this.canvas.container
+      ){
+        this.canvas.container.addEventListener('mousemove', this.onMouseMove)
+        this.canvas.container.addEventListener('click', this.onMouseClick)
+      } else {
+        console.error("err: lors de la récupération de la zone de dessin")
+      }
+    },
+    trackAction(event){
+      this.actions.push(event)
     },
     draw(){
-      this.getGridManager().draw(this.settings)
+      this.gridManager.draw(this.settings)
+      this.drawLastAction()
     },
-    getCanvas(){
-      return document.getElementById(this.canvas.ID)
+    drawLastAction(){
+      if(this.lastAction) {
+        let hex=this.gridManager.getHexFromEvent(this.lastAction)
+        this.highlightHex(hex)
+        this.gridManager.drawHex(hex)
+      } 
     },
-    getBoundingClientRect(){
-      return this.getCanvas().getBoundingClientRect()
+    highlightHex(hex){
+      hex.index=2
     },
     setGridManager(){
-      this.gridManager=new GridManager(this.getCanvas())
-    },
-    getGridManager(){
-      return this.gridManager
+      this.gridManager=GridManager(this.canvas.container, this.settings)
     },
     onMouseClick(event){
-      console.log("click :)")
-      let pixel=this.sanitizeMousePosition(event)
-      let hex=this.getGridManager().getHexUnderPixel(pixel)
-      hex.index=2
-      this.getGridManager().drawHex(hex)
-      console.log(hex)
+      console.log(event)
+      this.trackAction(event)
+      this.draw()
     },
     onMouseMove(event){
       this.setMousePosition(event)
       this.setHexUnderMousePosition()
     },
+    setCanvas(){
+      this.canvas.container=document.getElementById(this.canvas.ID)
+    },
     setMousePosition(event){
-      this.mouse.position=this.sanitizeMousePosition(event)
+      this.mouse.position=this.gridManager.getPixelFromEvent(event)
     },
     setHexUnderMousePosition(){
       this.mouse.coordinate.cube=this
-        .getGridManager()
+        .gridManager
         .getHexUnderPixel(this.mouse.position)
     },
-    sanitizeMousePosition(event){
-      let rect=this.getBoundingClientRect()
-      return {
-        x:event.clientX-rect.left,
-        y:event.clientY-rect.top  
-      }
+    setGridInfo(){
+      this.gridInfo=GridInfo(this.gridManager)
     }
   }
 } 
